@@ -1,0 +1,80 @@
+<div class="top-image">
+  <div class="top-image-content" style="background-image: url(assets/images/read-top.png);">
+      <div class="container">
+          <div class="top-content">
+              <div class="top-h">Read</div>
+              <div class="top-h3">Explore Russian literature from classic to modern!</div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="container">
+      <div class="breadcrumbs">
+         <a [routerLink]="['/']">Home</a>
+          <span class="active">/</span>
+          <a [routerLink]="['/learn']">Learn</a>
+          <span>/</span>
+          <span>Read</span>
+      </div>
+      <div class="filter-btn-wrap">
+        <div class="social-nets-filter-wrap">
+            <div class="social-nets-filter-left" [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/facebook-r.png"/>
+                </a>
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/pinterest-r.png"/>
+                </a>
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/twitter-r.png"/>
+                </a>
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/whatsapp.png" width="40px"/>
+                </a>
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/telegram-r.png"/>
+                </a>
+                <a href="#" class="social-nets-filter-i">
+                    <img src="assets/images/mail.png"/>
+                </a>
+            </div>
+            <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
+                <img src="assets/images/plus.png"/>
+            </span>
+        </div>
+    </div>
+    <div class="book-category">Classic</div>
+    <div class="book-wrap">
+        <div *ngIf="classicBooks || classicBooks.length > 0">
+            <a *ngFor="let book of classicBooks" [routerLink]="book.author.id" class="book-item">
+                <div 
+                    class="book-img" 
+                    [style.backgroundImage]="'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+ book.preview +')'">
+                </div>
+                <div class="book-author">{{ book.author.name }}</div>
+                <div class="book-name">{{ book.name }}</div>
+            </a>
+        </div>
+        <div *ngIf="!classicBooks || classicBooks.length === 0" class="watch-filter-empty">
+            <p>No books</p>
+        </div>
+    </div>
+    <div class="book-category book-category-modern">Modern</div>
+    <div class="book-wrap">
+        <div *ngIf="modernBooks || modernBooks.length > 0">
+            <a *ngFor="let book of modernBooks" [routerLink]="book.author.id" class="book-item">
+                <div 
+                    class="book-img" 
+                    [style.backgroundImage]="'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+ book.preview +')'">
+                </div>
+                <div class="book-author">{{ book.author.name }}</div>
+                <div class="book-name">{{ book.name }}</div>
+            </a>
+        </div>
+        <div *ngIf="!modernBooks || modernBooks.length === 0" class="watch-filter-empty">
+            <p>No books</p>
+        </div>
+    </div>
+  </div>
+</div>

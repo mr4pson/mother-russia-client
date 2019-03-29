@@ -1,0 +1,114 @@
+*, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Titillium Web', sans-serif;
+}
+.container {
+    width: 1280px;
+    margin: auto;
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+
+
+/* watch */
+
+.top-image-content {
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+}
+.top-image-content .top-h {
+    margin: 0 0 0 220px;
+    padding-top: 160px;
+}
+.top-image-content .top-h3 {
+    font-size: 36px;
+    margin-top: 5px;
+    margin-left: 220px;
+}
+.top-sections {
+    margin: 0;
+    margin-top: 10px;
+}
+.breadcrumbs {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 15px 10px 0 10px;
+}
+.breadcrumbs a {
+    color: #d50000;
+}
+.breadcrumbs span {
+    color: #282828;
+}
+.breadcrumbs span.active {
+    color: #d50000;
+}
+.genre-wrap {
+    margin-left: 10px;
+    margin-top: 25px;
+}
+.genre-h, .released-h {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 17px;
+}
+.genres {
+    margin-top: 15px;
+}
+.genre-item {
+    display: inline-block;
+    border: 1px solid #da1f20;
+    padding: 2px 35px 2px 10px;
+    border-radius: 20px;
+    position: relative;
+    margin-left: 25px;
+}
+.genres .genre-item:first-child {
+    margin-left: 0;
+}
+.genre-item .genre-name {
+    font-size: 15px;
+    display: inline-block;
+}
+.genre-item .genre-close {
+    position: absolute;
+    right: 7px;
+    top: calc(50% - 5px);
+    cursor: pointer;
+}
+.filter-close {
+    float: right;
+    color: #d50000;
+    border: 1px solid #da1f20;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+.filter-close .title {
+    font-size: 15px;
+}
+.filter-close .chevron-red {
+    margin-left: 10px;
+}
+.released-h {
+    margin-top: 20px;
+}
+/* watch */
+
+/* filter */
+
+
+
+/* filter */

@@ -1,0 +1,219 @@
+/* watch */
+*, body {
+    font-family: 'Titillium Web', sans-serif;
+}
+.top-h {
+    font-size: 144px;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 5px;
+    line-height: 115px;
+    margin-top: 225px;
+}
+.top-h3 {
+    font-size: 64px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 80px;
+    margin-top: 40px;
+}
+.top-image-content {
+    height: 380px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.top-image-content .top-h {
+    margin: 0 0 0 220px;
+    padding-top: 160px;
+}
+.top-image-content .top-h3 {
+    font-size: 36px;
+    margin-top: 5px;
+    margin-left: 220px;
+}
+.top-sections {
+    margin: 0;
+    margin-top: 10px;
+}
+
+
+.breadcrumbs {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 20px 0 0;
+}
+.breadcrumbs a {
+    color: #d50000;
+}
+.breadcrumbs span {
+    color: #282828;
+}
+.breadcrumbs span.active {
+    color: #d50000;
+}
+.breadcrumbs a, .breadcrumbs span {
+    margin-left: 7px;
+}
+.breadcrumbs a:first-child {
+    margin-left: 0;
+}
+
+.zoom-item {
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+.blog-item {
+    margin-top: 10px;
+}
+.blog-item-wrap {
+    padding: 0;
+    padding-left: 10px;
+}
+.zoom-item .inside {
+    background: #ccc;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    /*transition: background-size 0.4s ease, filter 0.4s;*/
+    position: relative;
+    transition: all 0.3s;
+}
+.zoom-item .outside {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.blog-item .inside{
+    height: 410px;
+}
+.zoom-item:hover .inside {
+    /*background-size: 120%;*/
+    transform: scale(1.2);
+}
+.zoom-item:hover .filler {
+    /*opacity: 0.5;*/
+}
+.zoom-item .filler {
+    width: 100%;
+    height: 0;
+    background-color: #1C3964;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 10;
+    bottom: 0;
+    position: absolute;
+    padding: 10px 20px;
+}
+.zoom-item .content {
+    position: absolute;
+    bottom: 0;
+    padding: 13px;
+}
+.zoom-item .sec-h {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 55px;
+}
+.zoom-item .preview {
+    color: #fff;
+    font-size: 17px;
+    line-height: 19px;
+}
+.posts .blog-item:first-child {
+    margin-left: 0;
+}
+.blog-small-wrap {
+    padding: 0;
+    padding-left: 10px;
+}
+.blog-small {
+    margin-top: 10px;
+}
+.blog-small .inside{
+    height: 303px;
+}
+.blog-small .sec-h {
+    font-size: 24px;
+}
+.blog-small .content {
+    bottom: auto;
+}
+.blog-small .outside {
+    top: 0;
+}
+
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+@media (min-width: 320px) and (max-width: 1280px) {
+    .top-image-content {
+        background-size: cover;
+    }
+    .container {
+        max-width: 100%;
+    }
+}
+@media (min-width: 1083px) and (max-width: 1280px) {
+    .top-h {
+        margin: 0 0 0 120px!important;
+    }
+    .top-h3 {
+        margin-left: 120px!important;
+    }
+}
+@media (min-width: 869px) and (max-width: 1082px) {
+    .top-h {
+        margin: 0 0 0 20px!important;
+        padding-top: 180px!important;
+        font-size: 120px;
+    }
+    .top-h3 {
+        margin-left: 20px!important;
+        font-size: 28px!important;
+        line-height: 40px!important;
+        padding-top: 10px!important;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .wrap .container {
+        max-width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .top-h {
+        font-size: 64px;
+        margin: 0 0 0 15px!important;
+        padding-top: 360px!important;
+    }
+    .top-h3 {
+        display: none;
+    }
+    .top-image-content {
+        height: 490px;
+    }
+}
+@media (min-width: 768px) and (max-width: 869px) {
+    .top-h {
+        margin: 0 0 0 20px!important;
+        padding-top: 180px!important;
+        font-size: 120px;
+    }
+    .top-h3 {
+        margin-left: 20px!important;
+        font-size: 28px!important;
+        line-height: 40px!important;
+        padding-top: 10px!important;
+    }
+}

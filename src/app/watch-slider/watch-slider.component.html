@@ -1,0 +1,7 @@
+<div class="watch-slider">
+    <ng5-slider 
+        [(value)]="filterDates.minDate" 
+        [(highValue)]="filterDates.maxDate" 
+        [options]="options" 
+        (userChange)="onUserChange($event)"></ng5-slider>
+</div>

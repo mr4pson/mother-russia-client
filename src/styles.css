@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.page-content blockquote {
+    border-left: solid 5px #d50000;
+    padding-left: 15px;
+}
+.fr-tall {
+    padding: 20px 0;
+}
+.fr-view .fr-img-caption .fr-img-wrap img {
+    height: auto;
+}

@@ -4,9 +4,147 @@
   <meta charset="utf-8">
   <title>MotherRussia</title>
   <base href="/">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,500,600,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+  <style>
+  .main-carousel .owl-dots{
+    position: absolute;
+    z-index: 100;
+    bottom: 65px;
+    left: 0;
+    right: 0;
+  }
+  .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+      background: #D50000;
+      padding: 6px;
+  }
+  .owl-theme .owl-dot {
+      outline: none;
+  }
+  .owl-theme .owl-dots .owl-dot span {
+      width: 12px;
+      height: 12px;
+  }
+
+  .slick-slide {
+      height: auto;
+  }
+  .slick-dots {
+      bottom: 65px;
+  }
+  .slick-dots li button:before {
+      color: #D6D6D6;
+      opacity: 1;
+      font-size: 13px;
+  }
+  .slick-dots li.slick-active button:before {
+      color: #D50000;
+      font-size: 20px;
+      opacity: 1;
+  }
+  .slick-dotted.slick-slider {
+      margin-bottom: 0;
+  }
+  .lyrics-row {
+    min-height: 22px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .slick-dots {
+            bottom: 20px!important;
+        }
+        .container {
+            width: 100%!important;
+            max-width: 100%!important;
+        }
+        .top .container {
+            padding: 20px 30px;
+        }
+    }
+    @media (min-width: 320px) and (max-width: 767px) {
+        .slick-dots {
+            bottom: 10px!important;
+        }
+        .watch-detail-content .left-side iframe {
+            width: calc(100% + 30px)!important;
+            margin-left: -15px;
+            height: 80vw!important;
+        }
+        .page-content table {
+            overflow: auto;
+            display: block;
+        }
+        .fr-view span.fr-img-caption.fr-dib.fr-fil {
+            margin: auto!important;
+        }
+        .fr-view span.fr-img-caption.fr-dii.fr-fir {
+            display: block;
+            margin: auto!important;
+            float: none!important;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 968px) { 
+        .lyrics-wrap {
+            width: 730px;
+            margin: auto;
+            margin-top: 40px;
+        }
+        .lyrics-wrap .col-sm-5 {
+            max-width: 50%;
+            flex: 0 0 50%;
+        }
+    }
+    @media (min-width: 969px) and (max-width: 1180px) {
+        .lyrics-wrap .col-sm-1 {
+            display: none;
+        }
+        .lyrics-wrap .col-sm-5 {
+            max-width: 50%;
+            flex: 0 0 50%;
+        }
+    }
+    @media (min-width: 320px)  and (max-width: 968px) {
+        .lyrics-wrap .col-sm-1 {
+            display: none;
+        }
+    }
+    table {
+        width: 100%;
+    }
+    table tr:nth-child(2n+1) {
+        background: #FBFBFB;
+    }
+    table tr:first-child {
+        font-weight: bold;
+    }
+    table tr {
+        border: 1px solid #E5E5E5;
+    }
+    table td {
+        padding: 5px 13px;
+    }
+    p[data-f-id="pbf"] {
+        display: none;
+    }
+    .alphabet-tbl {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .page-content a {
+        color: #D50000;
+        font-weight: bold;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.9.3/css/froala_style.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+
 </head>
 <body>
   <app-root></app-root>

@@ -1,0 +1,105 @@
+<div class="top-image">
+    <div class="top-image-content" [style.backgroundImage]="component && component.header && innerWidth > 767 ? 'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+component.header +')' : component && component.headerMobile && innerWidth <= 767 ? 'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+component.headerMobile +')' : ''">
+        <div class="container">
+            <div class="top-content">
+                <div class="top-h">{{ curCategory.name }}</div>
+                <!--div class="top-h3">Explore Russian language</div-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrap">
+    <div class="container">
+        <div class="breadcrumbs">
+            <a [routerLink]="['/']">Home</a>
+            <span class="active">/</span>
+            <a [routerLink]="['/learn']">Learn</a>
+            <span class="active">/</span>
+            <a [routerLink]="['/Russian_language']">Russian language</a>
+            <span *ngIf="curCategory">/</span>
+            <span *ngIf="curCategory">{{ curCategory.name }}</span>
+        </div>
+        <div class="filter-btn-wrap d-none d-md-block">
+            <div class="social-nets-filter-wrap">
+                <div class="social-nets-filter-left" [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/facebook-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/pinterest-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/twitter-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/whatsapp.png" width="40px"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/telegram-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/mail.png"/>
+                    </a>
+                </div>
+                <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
+                    <img src="assets/images/plus.png"/>
+                </span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="left-bar" [ngClass]="leftBarVisible === true ? 'active' : ''">
+                <div class="left-bar-btn d-block d-md-none" (click)="leftBarVisible = !leftBarVisible">
+                    <div>Contents</div>
+                </div>
+                <div class="inner">
+                    <div *ngFor="let section of sections">
+                        <div class="lang-sec-h">{{ section.name }}</div>
+                        <div *ngFor="let category of section.categories; let i = index">
+                        <div *ngIf="category.subCategories && category.subCategories.length > 0" class="lang-parent-category">
+                            <span class="lang-parent-h" (click)="categoryBtnsClicked[category.id] = !categoryBtnsClicked[category.id]">
+                                {{ category.name }}
+                                <svg class="chevron" [ngClass]="{'up': categoryBtnsClicked[category.id] === true}" xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5" fill="none">
+                                    <path d="M0.227667 4.0365L0.689712 4.38453C0.849828 4.49893 1.03683 4.55615 1.2503 4.55615C1.46817 4.55615 1.65295 4.49893 1.80495 4.38453L4.7996 2.12953L7.79423 4.38446C7.94621 4.49887 8.13103 4.55609 8.34881 4.55609C8.56239 4.55609 8.74935 4.49887 8.90949 4.38446L9.36547 4.03644C9.52159 3.91896 9.59961 3.77818 9.59961 3.61422C9.59961 3.44721 9.5215 3.30803 9.36549 3.19669L5.35421 0.176235C5.20627 0.058742 5.0215 -5.30055e-05 4.79962 -5.29861e-05C4.5819 -5.29671e-05 4.39496 0.0587258 4.23899 0.176235L0.227688 3.19669C0.0756873 3.31116 -0.000366308 3.45033 -0.000366293 3.61422C-0.000388214 3.77512 0.0756654 3.91582 0.227667 4.0365Z" fill="#D50000"/>
+                                </svg>
+                            </span>
+                            <div class="lang-child-wrap" [style.max-height.px]="categoryBtnsClicked[category.id] === false ? this.categoryChildWrapsHeight[category.id] : '0'" [ngClass]="categoryBtnsClicked[category.id] === false ? 'slideup' : 'slidedown'">
+                                <a *ngFor="let subCategory of category.subCategories" class="lang-child-category"  [ngClass]="{'active': curCategory.url == subCategory.url}" (click)="rowClick('subCategory', subCategory)" [routerLink]="'/Russian_language/subCategory/'+subCategory.url">{{ subCategory.name }}</a>
+                            </div>
+                        </div>
+                        <a *ngIf="category.subCategories && category.subCategories.length == 0" class="lang-category" [ngClass]="{'active': curCategory.url == category.url}" (click)="rowClick('category', category)" [routerLink]="'/Russian_language/category/'+category.url">{{ category.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-wrap">
+            <!--h1 class="category-name">{{ curCategory.name }}</h1-->
+            <div class="page-content lang-content fr-view" *ngIf="curCategory.content" [innerHtml]="curCategory.content | safeHtml"></div>
+            </div>
+            <div class="social-nets-filter-wrap social-nets-filter-bots d-block d-md-none"  [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
+                <div class="social-nets-filter-left">
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/facebook-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/pinterest-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/twitter-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/whatsapp.png" width="40px"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/telegram-r.png"/>
+                    </a>
+                    <a href="#" class="social-nets-filter-i">
+                        <img src="assets/images/mail.png"/>
+                    </a>
+                </div>
+                <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
+                    <img src="assets/images/plus.png"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

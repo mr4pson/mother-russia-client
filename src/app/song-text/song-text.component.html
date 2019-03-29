@@ -1,0 +1,3 @@
+<div *ngFor="let row of songTextSplited; index as i" class="lyrics-row" (mouseover)="onRowHover(i)" (mouseout)="onRowUnHover()" [ngClass]="{'hovered': i === hoveredRow}">
+  {{ row }}
+</div>

@@ -1,0 +1,168 @@
+<ngx-slick-carousel class="carousel main-carousel" 
+                    #slickModal="slick-carousel" 
+                    [config]="slideConfig" 
+                    (init)="slickInit($event)"
+                    (breakpoint)="breakpoint($event)"
+                    (afterChange)="afterChange($event)"
+                    (beforeChange)="beforeChange($event)">
+  <div ngxSlickItem class="top item slide top1" style="background-image: url(assets/images/learn.png);">
+    <div class="container">
+        <div class="top-content">
+            <div class="top-h">Learn</div>
+            <div class="top-h3">Explore Russian Language</div>
+            <ul class="top-advantages hidden-xs">
+                <li>Practice Russian at different levels</li>
+                <li>Watch Russian movies with subtitles</li>
+                <li>Listen Russain music with translated lyrics</li>
+                <li>Read Russian books</li>
+                <li>Learn Russain playing games!</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <div ngxSlickItem class="top item slide top2" style="background-image: url(assets/images/travel.png);">
+      <div class="container">
+          <div class="top-content">
+              <div class="top-h">Travel</div>
+              <div class="top-h3">Explore Russian Language</div>
+          </div>
+      </div>
+  </div>
+  <div ngxSlickItem class="top item slide top3" style="background-image: url(assets/images/culture.png);">
+      <div class="container">
+          <div class="top-content">
+              <div class="top-h">Culture</div>
+              <div class="top-h3">Explore Russian Language</div>
+          </div>
+      </div>
+  </div>
+  <div ngxSlickItem class="top item slide top4" style="background-image: url(assets/images/kitchen.png);">
+      <div class="container">
+          <div class="top-content">
+              <div class="top-h">Kitchen</div>
+              <div class="top-h3">Explore Russian Language</div>
+          </div>
+      </div>
+  </div>
+</ngx-slick-carousel>
+
+<div class="wrap">
+  <div class="container">
+      <div class="top-sections row">
+          <div class="top-section col-md-3 col-sm-4">
+              <a [routerLink]="['/learn']" class="sec-half-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec1.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">Learn</div>
+                          <div class="preview">Test your knoledge of facts about Russia, its histor, people, culture and cuisine</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+              <a href="#" class="sec-half-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec3.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">Kitchen</div>
+                          <div class="preview">Test your knowledge of facts about Russia, its history, people, culture and cuisine</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+          </div>
+          <div class="top-section col-md-3 col-sm-4">
+              <a href="#" class="sec-half-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec2.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">Culture</div>
+                          <div class="preview">Learn about many aspects of the Russian cultural heritage, including history, traditions, arts, society</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+              <a href="#" class="sec-half-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec4.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">Travel</div>
+                          <div class="preview">Test your knowledge of facts about Russia, its history, people, culture and cuisine</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+          </div>
+          <div class="top-section col-md-3 col-sm-4">
+              <a href="#" class="sec-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec5.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">12 Reasons Everyone Must Visit Russia</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+          </div>
+          <div class="top-section col-md-3 col-sm-4">
+              <a href="#" class="sec-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/top-sec6.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">FIFA World Cup in Russia</div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+      <!--div class="bot-sections row"-->
+          <div class="sub-bot-secion">
+            <div class="bot-section col-md-4 col-sm-4">
+                <a href="#" class="bot-sec-item zoom-item">
+                    <div class="inside" style="background-image: url(assets/images/bot-sec1.png)"></div>
+                    <div class="outside">
+                        <div class="content">
+                            <div class="sec-h">St. Petersburg</div>
+                            <div class="preview">New article</div>
+                        </div>
+                    </div>
+                    <div class="filler">
+                        <div class="filler-h">St. Petersburg</div>
+                        <div class="filler-preview">New article</div>
+                    </div>
+                </a>
+            </div>
+            <div class="bot-section col-md-4 col-sm-4">
+                <a href="#" class="bot-sec-item zoom-item">
+                    <div class="inside" style="background-image: url(assets/images/bot-sec2.png)"></div>
+                    <div class="outside">
+                        <div class="content">
+                            <div class="sec-h">Kazan</div>
+                            <div class="preview">New article</div>
+                        </div>
+                    </div>
+                    <div class="filler">
+                        <div class="filler-h">Kazan</div>
+                        <div class="filler-preview">New article</div>
+                    </div>
+                </a>
+            </div>
+         </div>
+          <div class="bot-section col-md-4 col-sm-4">
+              <a href="#" class="bot-sec-item zoom-item">
+                  <div class="inside" style="background-image: url(assets/images/bot-sec1.png)"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">Russian for Dating and Relationships</div>
+                          <div class="preview">New article</div>
+                      </div>
+                  </div>
+                  <div class="filler">
+                      <div class="filler-h">Russian for Dating and Relationships</div>
+                      <div class="filler-preview">This lesson will teach you essential words and phrases for speaking Russian in romantic situations. Learn how to express interest, give compliments, or express your deep feelings in Russian.</div>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <!--/div-->
+  </div>
+</div>
