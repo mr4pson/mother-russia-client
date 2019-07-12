@@ -1,6 +1,7 @@
 import { Song } from './song';
 export class Singer {
     id: number;
+    url: string;
     name: string;
     nameRus: string;
     preview: string;

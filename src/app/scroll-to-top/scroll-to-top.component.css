@@ -1,0 +1,113 @@
+button.scroltop {
+	height: 40px;  
+	width: 40px;
+	background:#D50000;  
+	border:none;
+	position: fixed;   
+	right: 15px;   
+	bottom:15px;
+	text-transform:uppercase;
+	margin:0; 
+	padding:0;    
+	cursor: pointer;    
+	display: none;    
+	text-align:center;  
+	z-index:999;
+    color: #fff;
+    user-select: none;
+    outline: none;
+}
+button.scroltop span{display: block;	font-size: 24px;	line-height: 24px;}
+
+.string {position:relative;}
+#btn-vibrate{
+    animation:vibrate 2s linear 0s infinite;
+    -moz-animation: vibrate 2s linear 0s infinite;
+    /* Firefox */
+    -webkit-animation: vibrate 2s linear 0s infinite;
+    /* Safari and Chrome */
+    -o-animation: vibrate 2s linear 0s infinite;
+    /* Opera */
+}
+@keyframes vibrate {
+    0% {
+        top: 0px;
+    }
+    25% {
+        top: -3px;
+    }
+    50% {
+        top: 0px;
+    }
+    75% {
+        top: 3px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+/* Firefox */
+@-moz-keyframes vibrate
+
+ {
+    0% {
+        top: 0px;
+    }
+    25% {
+        top: -3px;
+    }
+    50% {
+        top: 0px;
+    }
+    75% {
+        top: 3px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+/* Safari and Chrome */
+@-webkit-keyframes vibrate
+
+ {
+    0% {
+        top: 0px;
+    }
+    25% {
+        top: -3px;
+    }
+    50% {
+        top: 0px;
+    }
+    75% {
+        top: 3px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+/* Opera */
+@-o-keyframes vibrate
+
+ {
+    0% {
+        top: 0px;
+    }
+    25% {
+        top: -3px;
+    }
+    50% {
+        top: 0px;
+    }
+    75% {
+        top: 3px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+
+@media only screen and (max-width:480px) {
+    button.scroltop {font-size:7px;	height:40px;  	width: 40px;	line-height:16px;}
+    button.scroltop span {font-size: 20px;    line-height: 10px;}
+}

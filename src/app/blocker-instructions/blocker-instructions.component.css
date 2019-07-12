@@ -1,0 +1,13 @@
+.blocker-instructions-content__iframe {
+    width: 100%;
+    height: 305px;
+}
+.blocker-instructions-content {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.blocker-instructions-content.active {
+    visibility: visible;
+    opacity: 1;
+}

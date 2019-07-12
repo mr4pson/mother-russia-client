@@ -17,31 +17,7 @@
             <span>/</span>
             <span>Our mission</span>
         </div>
-        <div class="social-nets-filter-wrap d-none d-md-block">
-            <div class="social-nets-filter-left" [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/facebook-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/pinterest-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/twitter-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/whatsapp.png" width="40px"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/telegram-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/mail.png"/>
-                </a>
-            </div>
-            <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
-                <img src="assets/images/plus.png"/>
-            </span>
-        </div>
+        <app-social-bar [type]="'both'" [title]="title"></app-social-bar>
         <div class="page-wrap">
             <div class="left-bar" [ngClass]="leftBarVisible === true ? 'active' : ''">
                 <div class="left-bar-btn d-block d-md-none" (click)="leftBarVisible = !leftBarVisible">

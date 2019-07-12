@@ -20,39 +20,19 @@
               <span>{{ author.name }}</span>
           </div>
           <div class="filter-btn-wrap d-none d-md-block">
-              <div class="social-nets-filter-wrap">
-                  <div class="social-nets-filter-left" [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/facebook-r.png"/>
-                      </a>
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/pinterest-r.png"/>
-                      </a>
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/twitter-r.png"/>
-                      </a>
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/whatsapp.png" width="40px"/>
-                      </a>
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/telegram-r.png"/>
-                      </a>
-                      <a href="#" class="social-nets-filter-i">
-                          <img src="assets/images/mail.png"/>
-                      </a>
-                  </div>
-                  <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
-                      <img src="assets/images/plus.png"/>
-                  </span>
-              </div>
+              <app-social-bar [title]="title" [type]="'pc'"></app-social-bar>
           </div>
           <div class="book-author-name">{{ author.name }}</div>
           <div class="book-author-rus-name">{{ author.nameRus }}</div>
           <div class="book-list-wrap">
               <div *ngFor="let book of author.books" class="book-detail-item">
-                  <div class="book-detail-img" [style.backgroundImage]="'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+ book.detail +')'"></div>
+                  <div class="book-detail-img" [style.backgroundImage]="getBckgndImageUrl(book.detail)"></div>
                   <div class="book-detail-info-wrap">
-                      <div class="book-detail-name">{{ book.name }} ({{ book.nameRus }}) ({{ book.year }})</div>
+                      <div class="book-detail-name">
+                          {{ book.name }} 
+                          <span *ngIf="book.nameRus">({{ book.nameRus }}) </span>
+                          <span *ngIf="book.year">({{ book.year }})</span>
+                        </div>
                       <div class="book-detail-desc">{{ book.description }}</div>
                       <div class="amazon-link-wrap">
                           <a *ngIf="book.amazonEng && book.amazonEng != ''" [href]="book.amazonEng" class="amazon-link" target="_blank">
@@ -67,38 +47,14 @@
                   </div>
               </div>
           </div>
-        <div class="social-nets-filter-wrap social-nets-filter-wrap-bot d-block d-md-none">
-            <div class="social-nets-filter-left" [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'">
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/facebook-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/pinterest-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/twitter-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/whatsapp.png" width="40px"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/telegram-r.png"/>
-                </a>
-                <a href="#" class="social-nets-filter-i">
-                    <img src="assets/images/mail.png"/>
-                </a>
-            </div>
-            <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
-                <img src="assets/images/plus.png"/>
-            </span>
-        </div>
+          <app-social-bar [title]="title" [type]="'mobile'" class="mobile"></app-social-bar>
           <div class="related-wrap d-none d-md-block">
               <div class="related-h">Related</div>
               <div *ngIf="relatedBooks || relatedBooks.length > 0">
-                  <a *ngFor="let book of relatedBooks" [href]="['/read/'+book.author.id]" class="book-item">
+                  <a *ngFor="let book of relatedBooks" [routerLink]="['/read/'+book.author.url]" class="book-item">
                       <div 
                           class="book-img" 
-                          [style.backgroundImage]="'url(http://api-mr.cubaproducts.ru.swtest.ru/uploads/'+ book.preview +')'">
+                          [style.backgroundImage]="getBckgndImageUrl(book.preview)">
                       </div>
                       <div class="book-author">{{ book.author.name }}</div>
                       <div class="book-name">{{ book.name }}</div>

@@ -1,0 +1,86 @@
+.adblock-warning-partial-component {
+    position: relative;
+    background-color: #1F1F22;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.5s;
+}
+.adblock-warning-partial-component.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+.adblock-warning-partial-component__close {
+    cursor: pointer;
+    position: absolute;
+    right: 24px;
+    top: 18px;
+    opacity: 0.7;
+    height: 18px;
+    width: 18px;
+}
+.adblock-warning-partial-component__content {
+    width: 855px;
+    margin: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 14px 0 16px;
+}
+.adblock-warning-partial-component__image {
+    display: block;
+    height: 36px;
+    width: 36px;
+}
+.adblock-warning-partial-component__text {
+    font-family: "Roboto";
+    font-size: 20px;
+    width: 650px;
+    color: #fff;
+    margin: 0 5px 0 5px;
+    text-align: center;
+}
+.adblock-warning-partial-component .button-partial-component {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "Roboto";
+    font-weight: 500;
+    color: #201919;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+}
+.button-partial-component_size_sl, a.button-partial-component_size_sl {
+    font-size: 13px;
+    height: 32px;
+    padding: 25px 9px;
+}
+.button-partial-component__content, a.button-partial-component__content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    vertical-align: middle;
+    height: 100%;
+}

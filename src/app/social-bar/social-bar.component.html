@@ -1,0 +1,27 @@
+<div [ngClass]="type === 'mobile' ? 'social-nets-filter-bots d-block d-md-none' : type === 'pc' ? 'd-none d-md-block' : ''">
+  <div class="social-nets-filter-wrap"  [ngClass]="socialNetsBtnClicked === false ? 'slideup' : 'slidedown'" [class.vertical]="vertical" [class.horizontal]="!vertical">
+    <div class="social-nets-filter-left">
+        <a [href]="'https://www.facebook.com/sharer/sharer.php?u='+pagePath+'&quote='+title" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/facebook-r.png"/>
+        </a>
+        <a [href]="'https://www.pinterest.ru/pin/create/button/?url='+pagePath+'&description='+title+'&media=http://client.motherrussia.net/favicon.ico'" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/pinterest-r.png"/>
+        </a>
+        <a [href]="'http://twitter.com/share?text='+title+'&url='+pagePath+'&hashtags=russianlanguage'" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/twitter-r.png"/>
+        </a>
+        <a [href]="'https://wa.me/?text='+title+' '+pagePath" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/whatsapp.png" width="40px"/>
+        </a>
+        <a [href]="'https://telegram.me/share/url?url='+pagePath+'&text='+title" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/telegram-r.png"/>
+        </a>
+        <a [href]="'mailto:?subject='+title+'&amp;body='+pagePath" title="Share by Email" target="_blank" class="social-nets-filter-i">
+            <img src="assets/images/mail.png"/>
+        </a>
+    </div>
+    <span class="social-nets-filter-plus" [ngClass]="{'cross': socialNetsBtnClicked === true}" (click)="socialNetsBtnClicked = !socialNetsBtnClicked">
+        <img src="assets/images/plus.png"/>
+    </span>
+  </div>
+</div>

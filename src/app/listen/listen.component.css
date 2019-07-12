@@ -205,40 +205,6 @@
     color: #D50000;
     /*font-weight: 500;*/
 }
-.social-nets-filter-wrap {
-    float: right;
-    margin-top: 15px;
-    overflow: hidden;
-    max-height: 45px;
-}
-.social-nets-filter-i {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    transition: all 0.2s;
-} 
-.social-nets-filter-i:hover {
-    opacity: 0.6;
-}
-.social-nets-filter-left {
-    display: inline-block;
-    max-width: 140px;
-}
-.social-nets-filter-left a:first-child {
-    margin-left: 0;
-}
-.social-nets-filter-plus {
-    margin-left: 10px;
-    border: 1px solid #d50000;
-    border-radius: 50%;
-    display: inline-block;
-    vertical-align: top;
-    transition: all 0.3s;
-}
-.social-nets-filter-plus img {
-    padding: 9px;
-    cursor: pointer;
-}
 .watch-content {
     padding-top: 65px;
     text-align: center;
@@ -254,7 +220,7 @@
     width: 180px;
     background: #ccc;
     border-radius: 15px;
-    box-shadow: 4px 4px 4px #ccc;
+    /*box-shadow: 4px 4px 4px #ccc;*/
 }
 .watch-name {
     font-size: 15px;
@@ -279,40 +245,12 @@
 .filter-section.slideup {
     max-height: 0;
 }
-.social-nets-filter-left.slidedown {
-    max-width: 290px;             
-    -webkit-transition: max-width 0.3s ease-in-out;
-    -moz-transition: max-width 0.3s ease-in-out;
-    -o-transition: max-width 0.3s ease-in-out;
-    transition: max-width 0.3s ease-in-out;    
-}
-.social-nets-filter-left.slideup {
-    max-height: 140px;
-    -webkit-transition: max-width 0.3s ease-in-out;
-    -moz-transition: max-width 0.3s ease-in-out;
-    -o-transition: max-width 0.3s ease-in-out;
-    transition: max-width 0.3s ease-in-out;
-}
-
 .filter-section {
     width: 100%;
     position: relative;
 }
-.social-nets-filter-plus.cross {
-    -moz-transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
-    transform:rotate(-45deg);
-}
-
 .watch-filter-empty {
     padding-bottom: 40px;
-}
-.social-nets-filter-wrap-bot {
-    position: relative!important;
-    text-align: center;
-    margin: 20px 0 65px;
-    float: none;
-    bottom: 0!important;
 }
 
 @media (min-width: 1024px) and (max-width: 1279px) {
@@ -438,11 +376,6 @@
     }
     .top-image-content {
         height: 490px;
-    }
-    .social-nets-filter-wrap {
-        position: absolute;
-        right: 0;
-        bottom: -55px;
     }
 }
 @media (min-width: 769px) and (max-width: 869px) {

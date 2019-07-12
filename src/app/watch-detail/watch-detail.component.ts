@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Watch } from '../_models/watch';
 import { WatchGenre } from '../_models/watch-genre';
 import { WatchService } from '../_services/watch.service';
 import { NgxY2PlayerComponent, NgxY2PlayerOptions } from 'ngx-y2-player';
-import { concatAll } from 'rxjs/operators';
 import { HostListener } from '@angular/core';
-
+import { globals } from '../globals';
+import { Title } from "@angular/platform-browser";
+import { ImageService } from './../_services/image.service';
+declare var $: any;
 
 @Component({
   selector: 'app-watch-detail',
@@ -26,23 +28,42 @@ export class WatchDetailComponent implements OnInit {
     // aspectRatio: (3 / 4), // you can set ratio of aspect ratio to auto resize with
   };
 
-  socialNetsBtnClicked = false;
   watches: Watch[] = [];
   watch: Watch;
   genres: WatchGenre[];
   innerWidth: number = 0;
+  navigationSubscription;
+  title: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private WatchService: WatchService,
-    private location: Location
+    private location: Location,
+    private titleService:Title,
+    private imageService: ImageService
   ) {
-    this.innerWidth = window.screen.width;
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
   }
-
+  initialiseInvites() {
+    $('.loader-wrap').show();
+    this.innerWidth = window.screen.width;
+    this.titleService.setTitle("Watch");
+    this.getWatch();
+  }
+  getBckgndImageUrl(imageUrl) {
+    return this.imageService.getBckgndImageUrl(imageUrl);
+  }
+  getImageURL(imageUrl) {
+    return this.imageService.getImageURL(imageUrl);
+  }
   getGenres(): void {
     this.WatchService.getGenres().subscribe(genres => 
       {
@@ -55,13 +76,21 @@ export class WatchDetailComponent implements OnInit {
     );
   }
   getWatch(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.WatchService.getWatch(id)
+    const url = this.route.snapshot.paramMap.get('url');
+    this.WatchService.getWatch(url)
       .subscribe(
         watch => {
           this.watch = watch.data;
-          console.log(this.watch);
           this.getGenres();
+          this.title = "Watch - "+this.watch.name;
+          this.titleService.setTitle(this.title);
+          setTimeout(function() {
+            var image = document.createElement('img');
+            image.src = globals.getBgUrl($('.top-image-content')[0]);
+            image.onload = function () {
+              $('.loader-wrap').fadeOut();
+            };
+          }, 100);
         }
       );
   }
@@ -76,10 +105,14 @@ export class WatchDetailComponent implements OnInit {
         );
   }
   ngOnInit() {
-    this.getWatch();
+    
   }
   onReady(event) {
     console.log('ready');                                                                                                                                                                                                                                                                 
   }
-
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+       this.navigationSubscription.unsubscribe();
+    }
+  }
 }

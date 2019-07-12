@@ -4,12 +4,16 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgxY2PlayerModule } from 'ngx-y2-player';
 import { HttpClientModule } from '@angular/common/http';
 import { SafeHtmlPipe } from "./_pipes/safehtml";
+import { ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { DxScrollViewModule  } from "devextreme-angular";
+
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { WatchComponent } from './watch/watch.component';
@@ -24,6 +28,16 @@ import { LearnComponent } from './learn/learn.component';
 import { RussianLanguageComponent } from './russian-language/russian-language.component';
 import { AboutComponent } from './about/about.component';
 import { TravelComponent } from './travel/travel.component';
+import { ArticleComponent } from './article/article.component';
+import { CultureComponent } from './culture/culture.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { SocialBarComponent } from './social-bar/social-bar.component';
+import { SubscribePopupComponent } from './subscribe-popup/subscribe-popup.component';
+
+import { ImageService } from './_services/image.service';
+import { AdblockComponent } from './adblock/adblock.component';
+import { BlockerInstructionsComponent } from './blocker-instructions/blocker-instructions.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +57,15 @@ import { TravelComponent } from './travel/travel.component';
     RussianLanguageComponent,
     SafeHtmlPipe,
     AboutComponent,
-    TravelComponent
+    TravelComponent,
+    ArticleComponent,
+    CultureComponent,
+    KitchenComponent,
+    ScrollToTopComponent,
+    SocialBarComponent,
+    SubscribePopupComponent,
+    AdblockComponent,
+    BlockerInstructionsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +73,14 @@ import { TravelComponent } from './travel/travel.component';
     AppRoutingModule,
     SlickCarouselModule,
     Ng5SliderModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    DxScrollViewModule 
   ],
-  providers: [],
+  providers: [
+    ImageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

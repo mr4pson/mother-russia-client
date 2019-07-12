@@ -1,5 +1,6 @@
 export class Watch {
     id: number;
+    url: string;
     name: string;
     nameRus: string;
     preview: string;
@@ -17,4 +18,5 @@ export class Watch {
     sovietURL: string;
     imdbURL: string;
     subtitlesTypeId: number;
+    sovietmoviesSubtitles: string;
   }

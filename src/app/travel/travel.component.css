@@ -74,7 +74,7 @@
 .zoom-item .inside {
     background: #ccc;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     /*transition: background-size 0.4s ease, filter 0.4s;*/
     position: relative;
@@ -109,13 +109,13 @@
 .zoom-item .content {
     position: absolute;
     bottom: 0;
-    padding: 13px;
+    padding: 7px;
 }
 .zoom-item .sec-h {
     font-size: 48px;
     font-weight: 900;
     color: #fff;
-    line-height: 55px;
+    line-height: 46px;
 }
 .zoom-item .preview {
     color: #fff;
@@ -136,15 +136,21 @@
     height: 303px;
 }
 .blog-small .sec-h {
-    font-size: 24px;
+    font-size: 30px;
 }
 .blog-small .content {
-    bottom: auto;
+    bottom: 0;
 }
 .blog-small .outside {
-    top: 0;
+    /*bottom: 1050;*/
 }
-
+.posts .row {
+    max-width: calc(100% - -20px);
+    min-height: 400px;
+}
+.no-articles {
+    padding-left: 10px;
+}
 
 @media (min-width: 1024px) and (max-width: 1279px) {
     .container {
@@ -215,5 +221,42 @@
         font-size: 28px!important;
         line-height: 40px!important;
         padding-top: 10px!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+    .blog-item .inside {
+        height: 219px;
+    }
+    .blog-small-wrap.col-md-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .blog-small-wrap.col-md-8 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .zoom-item .sec-h {
+        /*font-size: 44px;*/
+    }
+    .zoom-item .preview {
+        font-size: 14px;
+    }
+    
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .blog-small .inside {
+        height: 240px;
+    }
+    .zoom-item .sec-h {
+        line-height: 44px;
+    }
+    .zoom-item .preview {
+        color: #fff;
+        font-size: 14px;
+        line-height: 16px;
     }
 }

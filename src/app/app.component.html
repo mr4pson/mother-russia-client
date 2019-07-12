@@ -1,3 +1,8 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+<div class="loader-wrap">
+    <div class="loader"></div>
+</div>
+<app-adblock *ngIf="showBlockerBar" class="d-none d-md-block" (showInstructions)="showInstructions($event)"></app-adblock>
+<app-blocker-instructions [ngClass]="instructionsShown ? 'active' : ''" [instructionsShown]="instructionsShown"></app-blocker-instructions>

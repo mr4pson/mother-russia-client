@@ -1,201 +1,227 @@
 <div class="header">
     <div class="container">
-        <div class="search-wrap">
-            <input 
-                [ngClass]="{'focused': searchFocused === true}"
-                (focus) = "searchFocused = true"
-                (focusout) = "searchFocused = false"
-                class="search"
-                name="search"
-                [placeholder]="searchFocused === true ? '' : 'SEARCH'">
-            <img class="search-icon" src="assets/images/search.png">
-        </div>
-        <div class="row">
-            <nav role="navigation">
-                <div id="menuToggle">
-                    <input class="hamburger" id="hamburger" type="checkbox" />
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <ul id="menu">
-                        <li (click) = 'liMenuHovered1 = !liMenuHovered1;' class="menu-section">
-                            <div class="menu-line">
-                                Learn
-                                <img [ngClass]="{'up': liMenuHovered1 === true}" class="chevron" src="assets/images/chevron-mob.png">
+        <div class="content">
+            <div class="search-wrap">
+                <form [formGroup]="searchForm">
+                    <input 
+                        [ngClass]="{'focused': searchFocused === true || phrase}"
+                        (focus)="searchFocused = true"
+                        (focusout)="searchFocused = false"
+                        (keyup)="onSearch($event)"
+                        class="search"
+                        [(ngModel)]="phrase"
+                        formControlName="phrase"
+                        [placeholder]="searchFocused === true ? '' : 'SEARCH'">
+                    <img (click)="hideMenu()" class="search-icon" src="assets/images/search.png">
+                </form>
+            </div>
+            <div class="search-results" [ngClass]="phrase ? 'active' : ''">
+                <div class="search-content">
+                    <dx-scroll-view
+                        [height]="120"
+                        [width]="160"
+                        direction="both">
+                            <div id="content">
+                                <a *ngFor="let link of searchedLinks" [routerLink]="link.url" class="search-res-item">{{ link.name }}</a>
                             </div>
-                            <ul class="sub-menu" [ngClass]="liMenuHovered1 === false ? 'slideup' : 'slidedown'">
-                                <div class="sub-menu-content">
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" routerLink="/Russian_language">Russian Language</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" routerLink="/watch">Watch</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" routerLink="/listen">Listen</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" routerLink="/read">Read</a>
-                                    </li>
-                                    <!--li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Play</a>
-                                    </li-->
+                    </dx-scroll-view>
+                </div>
+            </div>
+            <div class="row">
+                <nav role="navigation">
+                    <div id="menuToggle">
+                        <input class="hamburger" id="hamburger" type="checkbox" />
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <ul id="menu">
+                            <li (click) = 'liMenuHovered1 = !liMenuHovered1;' class="menu-section">
+                                <div class="menu-line">
+                                    Learn
+                                    <img [ngClass]="{'up': liMenuHovered1 === true}" class="chevron" src="assets/images/chevron-mob.png">
                                 </div>
+                                <ul class="sub-menu" [ngClass]="liMenuHovered1 === false ? 'slideup' : 'slidedown'">
+                                    <div class="sub-menu-content">
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" routerLink="/Russian-language">Russian Language</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" routerLink="/watch">Watch</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" routerLink="/listen">Listen</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" routerLink="/read">Read</a>
+                                        </li>
+                                        <!--li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Play</a>
+                                        </li-->
+                                    </div>
+                                </ul>
+                            </li>
+                            <li class="menu-section">
+                                <div class="menu-line">
+                                    <a (click)="hideMenu()" routerLink="/travel">Travel</a>
+                                    <!--img [ngClass]="{'up': liMenuHovered2 === true}" class="chevron" src="assets/images/chevron-mob.png"-->
+                                </div>
+                                <!--ul class="sub-menu" [ngClass]="liMenuHovered2 === false ? 'slideup' : 'slidedown'">
+                                    <div class="sub-menu-content">
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Russian visa</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Cities</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Survival guide</a>
+                                        </li>
+                                    </div>
+                                </ul-->
+                            </li>
+                            <li (click) = 'liMenuHovered3 = !liMenuHovered3' class="menu-section">
+                                <div class="menu-line">
+                                    <a (click)="hideMenu()" routerLink="/culture">Culture</a>
+                                    <!--img [ngClass]="{'up': liMenuHovered3 === true}" class="chevron" src="assets/images/chevron-mob.png"-->
+                                </div>
+                                <!--ul class="sub-menu" [ngClass]="liMenuHovered3 === false ? 'slideup' : 'slidedown'">
+                                    <div class="sub-menu-content">
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Traditions</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a (click)="hideMenu()" href="javascript:void(0)">Lifestyle</a>
+                                        </li>
+                                    </div>
+                                </ul-->
+                            </li>
+                            <li (click) = 'liMenuHovered4 = !liMenuHovered4' class="menu-section">
+                                <div class="menu-line">
+                                    <a (click)="hideMenu()" routerLink="/kitchen">Kitchen</a> 
+                                    <!--img [ngClass]="{'up': liMenuHovered4 === true}" class="chevron" src="assets/images/chevron-mob.png"-->
+                                </div>
+                                <!--ul class="sub-menu" [ngClass]="liMenuHovered4 === false ? 'slideup' : 'slidedown'">
+                                    <div class="sub-menu-content">
+                                        <li class="subsection">
+                                            <a href="javascript:void(0)">Dishes</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a href="javascript:void(0)">Drinks</a>
+                                        </li>
+                                        <li class="subsection">
+                                            <a href="javascript:void(0)">Recipes</a>
+                                        </li>
+                                    </div>
+                                </ul-->
+                            </li>
+                            <li class="menu-section">
+                                <div class="menu-line">
+                                    <a (click)="hideMenu()" routerLink="/about">About us</a>
+                                </div>
+                            </li>
+                            <li class="search-wrap-mob">
+                                <div class="search-content">
+                                    <form [formGroup]="searchForm">
+                                        <input
+                                            (focus)="searchFocused = true"
+                                            (focusout)="searchFocused = false"
+                                            (keyup)="onSearch($event)"
+                                            class="search-mob"
+                                            [(ngModel)]="phrase"
+                                            formControlName="phrase"
+                                            [placeholder]="searchFocused === true ? '' : 'SEARCH'">
+                                        <img class="search-icon" src="assets/images/search.png">
+                                    </form>
+                                </div>
+                            </li>
+                            <div *ngIf="searchedLinks && searchedLinks.length > 0" class="search-mob-results" [ngClass]="phrase ? 'active' : ''">
+                                <div class="search-mob-content">
+                                    <div id="content">
+                                        <a (click)="hideMenu()" *ngFor="let link of searchedLinks" [routerLink]="link.url" class="search-res-item">{{ link.name }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="col-md-3">
+                    <a (click)="hideMenu()" routerLink="">
+                        <img class="logo" src="assets/images/logo.svg">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <ul class="menu">
+                        <li (mouseover) = "liHovered1 = true" (mouseenter) = "liHovered1 = true" (mouseleave) = 'liHovered1 = false' [ngClass]="{'hovered': liHovered1 === true}">
+                            <a href="javascript:void(0)">
+                                <span>learn</span>
+                                <img [ngClass]="{'up': liHovered1 === true}" class="chevron" src="assets/images/chevron.png">
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a (click)="liHovered1=!liHovered1" routerLink="/Russian-language">Russian Language</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered1=!liHovered1" routerLink="/watch">Watch</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered1=!liHovered1" routerLink="/listen">Listen</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered1=!liHovered1" routerLink="/read">Read</a>
+                                </li>
+                                <!--li>
+                                    <a (click)="liHovered1=!liHovered1" href="javascript:void(0)">Play</a>
+                                </li-->
                             </ul>
                         </li>
-                        <li class="menu-section">
-                            <div class="menu-line">
-                                Travel
-                                <!--img [ngClass]="{'up': liMenuHovered2 === true}" class="chevron" src="assets/images/chevron-mob.png"-->
-                            </div>
-                            <!--ul class="sub-menu" [ngClass]="liMenuHovered2 === false ? 'slideup' : 'slidedown'">
-                                <div class="sub-menu-content">
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Russian visa</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Cities</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Survival guide</a>
-                                    </li>
-                                </div>
+                        <li (mouseover) = "liHovered2 = true" (mouseenter) = "liHovered2 = true" (mouseleave) = 'liHovered2 = false' [ngClass]="{'hovered': liHovered2 === true}">
+                            <a routerLink="/travel">travel</a>
+                            <!--ul class="submenu">
+                                <li>
+                                    <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Russian visa</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Cities</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Survival guide</a>
+                                </li>
                             </ul-->
                         </li>
-                        <li (click) = 'liMenuHovered3 = !liMenuHovered3' class="menu-section">
-                            <div class="menu-line">
-                                Culture 
-                                <img [ngClass]="{'up': liMenuHovered3 === true}" class="chevron" src="assets/images/chevron-mob.png">
-                            </div>
-                            <ul class="sub-menu" [ngClass]="liMenuHovered3 === false ? 'slideup' : 'slidedown'">
-                                <div class="sub-menu-content">
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Traditions</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a (click)="hideMenu()" href="javascript:void(0)">Lifestyle</a>
-                                    </li>
-                                </div>
-                            </ul>
+                        <li (mouseover) = "liHovered3 = true" (mouseenter) = "liHovered3 = true" (mouseleave) = 'liHovered3 = false' [ngClass]="{'hovered': liHovered3 === true}">
+                            <a routerLink="/culture">culture</a>
+                            <!--img [ngClass]="{'up': liHovered3 === true}" class="chevron" src="assets/images/chevron.png"-->
+                            <!--ul class="submenu">
+                                <li>
+                                    <a (click)="liHovered3=!liHovered3" href="javascript:void(0)">Traditions</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered3=!liHovered3" href="javascript:void(0)">Lifestyle</a>
+                                </li>
+                            </ul-->
                         </li>
-                        <li (click) = 'liMenuHovered4 = !liMenuHovered4' class="menu-section">
-                            <div class="menu-line">
-                                Kitchen 
-                                <img [ngClass]="{'up': liMenuHovered4 === true}" class="chevron" src="assets/images/chevron-mob.png">
-                            </div>
-                            <ul class="sub-menu" [ngClass]="liMenuHovered4 === false ? 'slideup' : 'slidedown'">
-                                <div class="sub-menu-content">
-                                    <li class="subsection">
-                                        <a href="javascript:void(0)">Dishes</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a href="javascript:void(0)">Drinks</a>
-                                    </li>
-                                    <li class="subsection">
-                                        <a href="javascript:void(0)">Recipes</a>
-                                    </li>
-                                </div>
-                            </ul>
+                        <li (mouseover) = "liHovered4 = true" (mouseenter) = "liHovered4 = true" (mouseleave) = 'liHovered4 = false' [ngClass]="{'hovered': liHovered4 === true}">
+                            <a routerLink="/kitchen">kitchen</a>
+                            <!--img [ngClass]="{'up': liHovered4 === true}" class="chevron" src="assets/images/chevron.png"-->
+                            <!--ul class="submenu">
+                                <li>
+                                    <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Dishes</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Drinks</a>
+                                </li>
+                                <li>
+                                    <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Recipes</a>
+                                </li>
+                            </ul-->
                         </li>
-                        <li class="menu-section">
-                            <div class="menu-line">
-                                <a routerLink="/about">About us</a>
-                            </div>
-                        </li>
-                        <li class="search-wrap-mob">
-                            <div class="search-content">
-                                <input 
-                                    class="search-mob"
-                                    name="search-mob"
-                                    [placeholder]="searchFocused === true ? '' : 'SEARCH'"/>
-                                <img class="search-icon" src="assets/images/search.png">
-                            </div>
+                        <li (mouseenter) = "liHovered5 = true" (mouseleave) = 'liHovered5 = false' [ngClass]="{'hovered': liHovered5 === true}">
+                            <a routerLink="/about">About us</a>
                         </li>
                     </ul>
                 </div>
-            </nav>
-            <div class="col-md-3">
-                <a routerLink="">
-                    <img class="logo" src="assets/images/logo.svg">
-                </a>
-            </div>
-            <div class="col-md-9">
-                <ul class="menu">
-                    <li (mouseover) = "liHovered1 = true" (mouseenter) = "liHovered1 = true" (mouseleave) = 'liHovered1 = false' [ngClass]="{'hovered': liHovered1 === true}">
-                        <a href="javascript:void(0)">
-                            <span>learn</span>
-                            <img [ngClass]="{'up': liHovered1 === true}" class="chevron" src="assets/images/chevron.png">
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a (click)="liHovered1=!liHovered1" routerLink="/Russian_language">Russian Language</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered1=!liHovered1" routerLink="/watch">Watch</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered1=!liHovered1" routerLink="/listen">Listen</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered1=!liHovered1" routerLink="/read">Read</a>
-                            </li>
-                            <!--li>
-                                <a (click)="liHovered1=!liHovered1" href="javascript:void(0)">Play</a>
-                            </li-->
-                        </ul>
-                    </li>
-                    <li (mouseover) = "liHovered2 = true" (mouseenter) = "liHovered2 = true" (mouseleave) = 'liHovered2 = false' [ngClass]="{'hovered': liHovered2 === true}">
-                        <a [routerLink]="'/travel'">
-                            <span>travel</span>
-                        </a>
-                        <!--ul class="submenu">
-                            <li>
-                                <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Russian visa</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Cities</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered2=!liHovered2" href="javascript:void(0)">Survival guide</a>
-                            </li>
-                        </ul-->
-                    </li>
-                    <li (mouseover) = "liHovered3 = true" (mouseenter) = "liHovered3 = true" (mouseleave) = 'liHovered3 = false' [ngClass]="{'hovered': liHovered3 === true}">
-                        <a href="javascript:void(0)">
-                            <span>culture</span>
-                            <img [ngClass]="{'up': liHovered3 === true}" class="chevron" src="assets/images/chevron.png">
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a (click)="liHovered3=!liHovered3" href="javascript:void(0)">Traditions</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered3=!liHovered3" href="javascript:void(0)">Lifestyle</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li (mouseover) = "liHovered4 = true" (mouseenter) = "liHovered4 = true" (mouseleave) = 'liHovered4 = false' [ngClass]="{'hovered': liHovered4 === true}">
-                        <a href="javascript:void(0)">
-                            <span>kitchen</span>
-                            <img [ngClass]="{'up': liHovered4 === true}" class="chevron" src="assets/images/chevron.png">
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Dishes</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Drinks</a>
-                            </li>
-                            <li>
-                                <a (click)="liHovered4=!liHovered4" href="javascript:void(0)">Recipes</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li (mouseenter) = "liHovered5 = true" (mouseleave) = 'liHovered5 = false' [ngClass]="{'hovered': liHovered5 === true}">
-                        <a routerLink="/about">About us</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </div>
+<app-scroll-to-top></app-scroll-to-top>

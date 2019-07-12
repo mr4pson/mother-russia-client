@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Data } from '../_models/data';
+import { globals } from './../globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AboutSectionService {
-  private baseURI = 'http://api-mr.cubaproducts.ru.swtest.ru';
   getSection(url: string) {
-    return this.http.get<Data>(this.baseURI+'/aboutSectionsByUrl/'+url);
+    return this.http.get<Data>(globals.baseURI+'/aboutSectionsByUrl/'+url);
   }
 
   getSections() {
-    return this.http.get<Data>(this.baseURI+'/aboutSections');
+    return this.http.get<Data>(globals.baseURI+'/aboutSections');
   }
   constructor(
     private http: HttpClient

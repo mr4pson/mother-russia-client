@@ -5,7 +5,7 @@
                     (breakpoint)="breakpoint($event)"
                     (afterChange)="afterChange($event)"
                     (beforeChange)="beforeChange($event)">
-  <div ngxSlickItem class="top item slide top1" style="background-image: url(assets/images/learn.png);">
+  <!--div ngxSlickItem class="top item slide top1" style="background-image: url(assets/images/learn.png);">
     <div class="container">
         <div class="top-content">
             <div class="top-h">Learn</div>
@@ -19,31 +19,16 @@
             </ul>
         </div>
     </div>
-  </div>
-  <div ngxSlickItem class="top item slide top2" style="background-image: url(assets/images/travel.png);">
-      <div class="container">
-          <div class="top-content">
-              <div class="top-h">Travel</div>
-              <div class="top-h3">Explore Russian Language</div>
-          </div>
-      </div>
-  </div>
-  <div ngxSlickItem class="top item slide top3" style="background-image: url(assets/images/culture.png);">
-      <div class="container">
-          <div class="top-content">
-              <div class="top-h">Culture</div>
-              <div class="top-h3">Explore Russian Language</div>
-          </div>
-      </div>
-  </div>
-  <div ngxSlickItem class="top item slide top4" style="background-image: url(assets/images/kitchen.png);">
-      <div class="container">
-          <div class="top-content">
-              <div class="top-h">Kitchen</div>
-              <div class="top-h3">Explore Russian Language</div>
-          </div>
-      </div>
-  </div>
+  </div-->
+    <div *ngFor="let slider of sliders; let i = index" ngxSlickItem class="top item slide" [ngClass]="'top'+(i+1)" [style.backgroundImage]="getBckgndImageUrl(slider.image)">
+        <div class="container">
+            <div class="top-content">
+                <div class="top-h">{{ slider.name }}</div>
+                <div class="top-h3">{{ slider.description }}</div>
+                <div class="slider-content" [innerHTML]="slider.content"></div>
+            </div>
+        </div>
+    </div>
 </ngx-slick-carousel>
 
 <div class="wrap">
@@ -60,7 +45,7 @@
                       <div class="filler"></div>
                   </div>
               </a>
-              <a href="#" class="sec-half-item zoom-item">
+              <a [routerLink]="['/kitchen']" class="sec-half-item zoom-item">
                   <div class="inside" style="background-image: url(assets/images/top-sec3.png)"></div>
                   <div class="outside">
                       <div class="content">
@@ -72,7 +57,7 @@
               </a>
           </div>
           <div class="top-section col-md-3 col-sm-4">
-              <a href="#" class="sec-half-item zoom-item">
+              <a [routerLink]="['/culture']" class="sec-half-item zoom-item">
                   <div class="inside" style="background-image: url(assets/images/top-sec2.png)"></div>
                   <div class="outside">
                       <div class="content">
@@ -82,7 +67,7 @@
                       <div class="filler"></div>
                   </div>
               </a>
-              <a href="#" class="sec-half-item zoom-item">
+              <a [routerLink]="['/travel']" class="sec-half-item zoom-item">
                   <div class="inside" style="background-image: url(assets/images/top-sec4.png)"></div>
                   <div class="outside">
                       <div class="content">
@@ -93,7 +78,18 @@
                   </div>
               </a>
           </div>
-          <div class="top-section col-md-3 col-sm-4">
+          <div *ngFor="let article of mostViewedArticles" class="top-section col-md-3 col-sm-4">
+              <a [routerLink]="article.section+'/'+article.url" class="sec-item zoom-item">
+                  <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photoTall +')'"></div>
+                  <div class="outside">
+                      <div class="content">
+                          <div class="sec-h">{{ article.title }}</div>
+                      </div>
+                      <div class="filler"></div>
+                  </div>
+              </a>
+          </div>
+          <!--div class="top-section col-md-3 col-sm-4">
               <a href="#" class="sec-item zoom-item">
                   <div class="inside" style="background-image: url(assets/images/top-sec5.png)"></div>
                   <div class="outside">
@@ -113,56 +109,41 @@
                       </div>
                   </div>
               </a>
-          </div>
+          </div-->
       <!--div class="bot-sections row"-->
-          <div class="sub-bot-secion">
-            <div class="bot-section col-md-4 col-sm-4">
-                <a href="#" class="bot-sec-item zoom-item">
-                    <div class="inside" style="background-image: url(assets/images/bot-sec1.png)"></div>
+        <div class="sub-bot-secion">
+            <div *ngFor="let article of bottomArticlesLeft" class="bot-section col-md-4 col-sm-4">
+                <a [routerLink]="article.section+'/'+article.url" class="bot-sec-item zoom-item">
+                    <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photo +')'"></div>
                     <div class="outside">
                         <div class="content">
-                            <div class="sec-h">St. Petersburg</div>
-                            <div class="preview">New article</div>
+                            <div class="sec-h">{{ article.title }}</div>
+                            <div class="preview">{{ article.preview }}</div>
                         </div>
                     </div>
                     <div class="filler">
-                        <div class="filler-h">St. Petersburg</div>
-                        <div class="filler-preview">New article</div>
-                    </div>
-                </a>
-            </div>
-            <div class="bot-section col-md-4 col-sm-4">
-                <a href="#" class="bot-sec-item zoom-item">
-                    <div class="inside" style="background-image: url(assets/images/bot-sec2.png)"></div>
-                    <div class="outside">
-                        <div class="content">
-                            <div class="sec-h">Kazan</div>
-                            <div class="preview">New article</div>
-                        </div>
-                    </div>
-                    <div class="filler">
-                        <div class="filler-h">Kazan</div>
-                        <div class="filler-preview">New article</div>
+                        <div class="filler-h">{{ article.title }}</div>
+                        <div class="filler-preview">{{ article.preview }}</div>
                     </div>
                 </a>
             </div>
          </div>
-          <div class="bot-section col-md-4 col-sm-4">
-              <a href="#" class="bot-sec-item zoom-item">
-                  <div class="inside" style="background-image: url(assets/images/bot-sec1.png)"></div>
-                  <div class="outside">
-                      <div class="content">
-                          <div class="sec-h">Russian for Dating and Relationships</div>
-                          <div class="preview">New article</div>
-                      </div>
-                  </div>
-                  <div class="filler">
-                      <div class="filler-h">Russian for Dating and Relationships</div>
-                      <div class="filler-preview">This lesson will teach you essential words and phrases for speaking Russian in romantic situations. Learn how to express interest, give compliments, or express your deep feelings in Russian.</div>
-                  </div>
-              </a>
-          </div>
+         <div *ngFor="let article of bottomArticlesRight" class="bot-section col-md-4 col-sm-4">
+            <a [routerLink]="article.section+'/'+article.url" class="bot-sec-item zoom-item">
+                <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photo +')'"></div>
+                <div class="outside">
+                    <div class="content">
+                        <div class="sec-h">{{ article.title }}</div>
+                        <div class="preview">{{ article.preview }}</div>
+                    </div>
+                </div>
+                <div class="filler">
+                    <div class="filler-h">{{ article.title }}</div>
+                    <div class="filler-preview">{{ article.preview }}</div>
+                </div>
+            </a>
+        </div>
       </div>
       <!--/div-->
-  </div>
+    </div>
 </div>

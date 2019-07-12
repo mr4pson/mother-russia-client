@@ -1,33 +1,65 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Book } from '../_models/book';
 import { BookService } from '../_services/book.service';
 import { Author } from '../_models/bookAuthor';
+import { globals } from '../globals';
+import { Title } from "@angular/platform-browser";
+import { ImageService } from './../_services/image.service';
+declare var $: any;
+
 @Component({
   selector: 'app-read-detail',
   templateUrl: './read-detail.component.html',
   styleUrls: ['./read-detail.component.css']
 })
 export class ReadDetailComponent implements OnInit {
-  socialNetsBtnClicked = false;
   author: Author;
   relatedBooks: Book[] = [];
+  navigationSubscription;
+  title: string;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private BookService: BookService,
-    private location: Location
-  ) { }
+    private location: Location,
+    private titleService:Title,
+    private imageService: ImageService
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
+  initialiseInvites() {
+    $('.loader-wrap').show();
+    this.titleService.setTitle("Read");
+    this.getAuthor();
+  }
   getAuthor(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.BookService.getAuthor(id)
+    const url = this.route.snapshot.paramMap.get('url');
+    this.BookService.getAuthor(url)
       .subscribe(author => 
         {
           this.author = author.data;
           console.log(this.author);
           this.getRelatedBooks();
+          this.title = "Read - " + this.author.name;
+          this.titleService.setTitle(this.title);
+          setTimeout(function() {
+            var image = document.createElement('img');
+            image.src = globals.getBgUrl($('.top-image-content')[0]);
+            image.onload = function () {
+              $('.loader-wrap').fadeOut();
+            };
+          }, 100);
         }
       );
+  }
+  getBckgndImageUrl(imageUrl) {
+    return this.imageService.getBckgndImageUrl(imageUrl);
   }
   getRelatedBooks(): void {
     this.BookService.getBooks()
@@ -40,7 +72,10 @@ export class ReadDetailComponent implements OnInit {
         );
   }
   ngOnInit() {
-    this.getAuthor();
   }
-
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+       this.navigationSubscription.unsubscribe();
+    }
+  }
 }

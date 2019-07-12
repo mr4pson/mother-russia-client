@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { globals } from '../globals';
+import { Title } from "@angular/platform-browser";
+import { ArticleService } from '../_services/article.service';
+import { SliderService } from './../_services/slider.service';
+import { ImageService } from './../_services/image.service';
+import { Article } from '../_models/article';
+import { Slider } from './../_models/slider';
+declare var $: any;
+
 
 @Component({
   selector: 'app-home',
@@ -6,6 +15,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  baseURI = 'http://api.motherrussia.net';
   slideConfig = {
     "dots": true,
     "arrows": false,
@@ -32,10 +42,56 @@ export class HomeComponent implements OnInit {
   beforeChange(e) {
     //console.log('beforeChange');
   }
-
-  constructor() { }
-
+  mostViewedArticles: Article[];
+  bottomArticlesLeft: Article[] = [];
+  bottomArticlesRight: Article[] = [];
+  sliders: Slider[];
+  constructor(
+    private titleService: Title,
+    private articleService: ArticleService,
+    private sliderService: SliderService,
+    private imageService: ImageService
+  ) {
+    this.titleService.setTitle("MotherRussia.net");
+  }
+  getBckgndImageUrl(imageUrl) {
+    return this.imageService.getBckgndImageUrl(imageUrl);
+  }
   ngOnInit() {
+    $('.loader-wrap').show();
+    this.articleService.getMostViewedArticles().subscribe(articles => {
+      this.mostViewedArticles = articles.data;
+    });
+    this.articleService.getLastArticleBySection('travel').subscribe(article => {
+      article.data ? this.bottomArticlesLeft.push(article.data) : null;
+    });
+    this.articleService.getLastArticleBySection('culture').subscribe(article => {
+      article.data ? this.bottomArticlesLeft.push(article.data) : null;
+    });
+    this.articleService.getLastArticleBySection('kitchen').subscribe(article => {
+      console.log(article);
+      article.data ? this.bottomArticlesRight.push(article.data) : null;
+    });
+    this.sliderService.getSliders().subscribe(sliders => {
+      this.sliders = sliders.data;
+      console.log(this.sliders);
+      let imagesReady = 0;
+      setTimeout(() => {
+        $('ngx-slick-carousel .slide').each(function() {
+            var image = document.createElement('img');
+            image.src = globals.getBgUrl($(this)[0]);
+            image.onload = function () {
+              imagesReady++;
+            };
+        });
+      }, 1000);
+      setInterval(() => {
+        if (imagesReady >= 4) {
+          $('.loader-wrap').fadeOut();
+          imagesReady = 0;
+        }
+      }, 400);
+    })
   }
 
 }

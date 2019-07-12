@@ -19,9 +19,6 @@
     }
 }
 
-
-/* watch */
-
 .top-image-content {
     height: 380px;
     background-size: cover;
@@ -105,10 +102,35 @@
 .released-h {
     margin-top: 20px;
 }
-/* watch */
-
-/* filter */
-
-
-
-/* filter */
+.loader-wrap {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #212320;
+    z-index: 100000;
+}
+.loader {
+    width: 320px;
+    height: 160px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url(/assets/images/loader.gif);
+    background-size: contain;
+}
+app-blocker-instructions {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    visibility: hidden;
+}
+app-blocker-instructions.active {
+    visibility: visible;
+}

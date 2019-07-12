@@ -1,0 +1,35 @@
+<div class="top-image">
+  <div class="top-image-content" style="background-image: url(/assets/images/kitchen-top.jpg);">
+    <div class="container">
+      <div class="top-content">
+          <div class="top-h">Kitchen</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="container">
+    <div class="breadcrumbs">
+        <a [routerLink]="['/']">Home</a>
+        <span>/</span>
+        <span>Kitchen</span>
+    </div>
+    <div class="posts">
+      <div *ngIf="articles && articles.length > 0" class="row">
+        <div *ngFor="let article of articles" class="blog-small-wrap" [ngClass]="article.type == 1 ? 'col-md-4' : 'col-md-8'">
+          <a [routerLink]="article.url" class="blog-small zoom-item">
+            <div class="inside"  [style.backgroundImage]="getBckgndImageUrl(article.photo)"></div>
+            <div class="outside">
+              <div class="content">
+                <div class="sec-h">{{ article.title }}</div>
+                <div class="preview">{{ article.preview }}</div>
+              </div>
+              <div class="filler"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="articles && articles.length === 0" class="row no-articles">No articles</div>
+    </div>
+  </div>
+</div>

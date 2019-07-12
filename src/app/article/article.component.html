@@ -1,0 +1,27 @@
+<div class="top-image">
+    <div class="top-image-content" [style.backgroundImage]="article && article.header && innerWidth > 767 ? getBckgndImageUrl(article.header) : article && article.headerMobile && innerWidth <= 767 ? getBckgndImageUrl(article.headerMobile) : ''">
+        <div class="container">
+            <div class="top-content">
+                <div *ngIf="article" class="top-h">{{ article.title }}</div>
+                <!--div class="top-h3">Explore Russian language</div-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrap">
+    <div class="container">
+        <div class="breadcrumbs">
+            <a [routerLink]="['/']">Home</a>
+            <span class="active">/</span>
+            <a [routerLink]="['/'+section]">{{ section | titlecase }}</a>
+            <span class="active">/</span>
+            <span *ngIf="article">{{ article.title }}</span>
+        </div>
+        <app-social-bar [title]="title" [type]="'pc'"></app-social-bar>
+        <div class="content">
+            <div class="article-content fr-view" *ngIf="article && article.content" [innerHtml]="article.content | safeHtml"></div>
+        </div>
+        <app-social-bar [title]="title" [type]="'mobile'" class="mobile"></app-social-bar>
+    </div>
+</div>
+

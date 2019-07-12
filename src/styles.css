@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-.page-content blockquote {
+.page-content blockquote, .article-content blockquote {
     border-left: solid 5px #d50000;
     padding-left: 15px;
 }
@@ -8,4 +8,238 @@
 }
 .fr-view .fr-img-caption .fr-img-wrap img {
     height: auto;
+}
+.fr-dark {
+    filter: brightness(70%);
+}
+.fr-responsive {
+    height: auto;
+}
+table td {
+    padding: 0 0;
+}
+.fr-view blockquote, .fr-view blockquote blockquote, .fr-view blockquote blockquote blockquote, .fr-view blockquote blockquote blockquote blockquote, .fr-view blockquote blockquote blockquote blockquote blockquote blockquote, .fr-view blockquote blockquote blockquote blockquote blockquote blockquote blockquote {
+    color: #000!important;
+}
+.fr-view blockquote {
+    border-left: solid 5px #d50000!important;
+    padding-left: 15px!important;
+    color: #000;
+}
+.fr-transparent-tbl tr {
+    background: none!important;
+    border: none;
+}
+.fr-transparent-tbl td {
+    border: none!important
+}
+.fr-float-left {
+    display: inline!important;
+    float: left!important;
+    margin: 10px 10px 10px 0!important;
+}
+.fr-float-right {
+    display: inline!important;
+    float: right!important;
+    margin: 10px 0px 10px 10px!important;
+}
+.fr-left-padding {
+    padding-left: 10px!important;
+  }
+.fr-view img {
+    height: auto;
+}
+.fr-view {
+    line-height: 2;
+}
+.article-content {
+    font-family: 'Roboto', sans-serif!important;
+    max-width: 835px;
+    margin: auto;
+}
+.fr-view button.fr-dib.fr-fil {
+    margin-left: 0;
+    text-align: left;
+}
+.fr-view button.fr-dib {
+    margin: 5px auto;
+    display: block;
+    float: none;
+    vertical-align: top;
+}
+.fr-view button.fr-dib.fr-fir {
+    margin-right: 0;
+    text-align: right;
+}
+.fr-view button {
+    height: auto!important;
+    position: relative;
+    max-width: 100%;
+}
+.fr-view table td {
+    /*display: inline-block;*/
+}
+
+.main-carousel .owl-dots{
+    position: absolute;
+    z-index: 100;
+    bottom: 65px;
+    left: 0;
+    right: 0;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #D50000;
+    padding: 6px;
+}
+.owl-theme .owl-dot {
+    outline: none;
+}
+.owl-theme .owl-dots .owl-dot span {
+    width: 12px;
+    height: 12px;
+}
+
+.slick-slide {
+    height: auto;
+}
+.slick-dots {
+    bottom: 65px;
+}
+.slick-dots li button:before {
+    color: #D6D6D6;
+    opacity: 1;
+    font-size: 13px;
+}
+.slick-dots li.slick-active button:before {
+    color: #D50000;
+    font-size: 20px;
+    opacity: 1;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+.lyrics-row {
+    min-height: 22px;
+}
+table {
+    width: 100%;
+}
+table tr:nth-child(2n+1) {
+    background: #FBFBFB;
+}
+.alphabet-tbl table tr:first-child {
+    font-weight: bold;
+}
+table tr {
+    border: 1px solid #E5E5E5;
+}
+.article-content table td {
+    padding: 0;
+}
+table td {
+    padding: 5px 13px;
+}
+p[data-f-id="pbf"] {
+    display: none;
+}
+.alphabet-tbl {
+    max-width: 100%;
+    overflow: auto;
+}
+.page-content a, .article-content a {
+    color: #D50000;
+    font-weight: bold;
+}
+.fr-cell-bold {
+    font-weight: bold;
+}
+.fr-view .fr-file::after {
+    display: none;
+}
+/*.top-advantages*/ .top-content ul {
+    list-style: none;
+    margin-top: 15px;
+}
+.top-content ul li {
+    font-size: 17px;
+    color: #fff;
+    padding-left: 5px;
+    margin-top: 5px;
+}
+.top-content ul li:before {
+    content:  "—";
+    position: relative;
+    left:     -5px;
+}
+.top-content p:last-child {
+    display: none;
+}
+.gifffer-play-button {
+    background: #fff!important;
+    box-shadow: 0px 0px 4px 2px #777777;
+}
+app-adblock {
+    z-index: 10;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .slick-dots {
+        bottom: 20px!important;
+    }
+    .container {
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+    .top .container {
+        padding: 20px 30px;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .slick-dots {
+        bottom: 10px!important;
+    }
+    .watch-detail-content .left-side iframe {
+        width: calc(100% + 30px)!important;
+        margin-left: -15px;
+        height: 80vw!important;
+    }
+    .page-content table, .article-content table {
+        overflow: auto;
+        display: block;
+    }
+    .fr-view span.fr-img-caption.fr-dib.fr-fil {
+        margin: auto!important;
+    }
+    .fr-view span.fr-img-caption.fr-dii.fr-fir {
+        display: block;
+        margin: auto!important;
+        float: none!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 968px) {
+    .lyrics-wrap {
+        width: 730px;
+        margin: auto;
+        margin-top: 40px;
+    }
+    .lyrics-wrap .col-sm-5 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+}
+@media (min-width: 969px) and (max-width: 1180px) {
+    .lyrics-wrap .col-sm-1 {
+        display: none;
+    }
+    .lyrics-wrap .col-sm-5 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+}
+@media (min-width: 320px)  and (max-width: 968px) {
+    .lyrics-wrap .col-sm-1 {
+        display: none;
+    }
 }

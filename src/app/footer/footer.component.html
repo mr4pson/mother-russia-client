@@ -6,30 +6,12 @@
                     <img class="footer-logo" src="assets/images/logo.svg">
                 </div>
                 <div class="col-md-6 subscribe-footer-wrap">
-                    <!--ul class="menu-footer"> menu-footer-wrap
-                        <li>
-                            <a href="#">Learn</a>
-                        </li>
-                        <li>
-                            <a href="#">Travel</a>
-                        </li>
-                        <li>
-                            <a href="#">Culture</a>
-                        </li>
-                        <li>
-                            <a href="#">Kitchen</a>
-                        </li>
-                        <li>
-                            <a href="#">About us</a>
-                        </li>
-                    </ul-->
-                    <input class="subscribe-footer-input" type="email" name="email" placeholder="Enter your email"/>
-                    <button class="subscribe-footer-btn">Subscibe
-                        <img src="assets/images/message.svg"/>
-                    <!--object type="image/svg+xml" data="assets/images/message.svg" width="20" height="14" >
-                                    Your browser does not support SVG
-                                </object-->
-                    </button>
+                    <form [formGroup]="subscribeForm">
+                        <input class="subscribe-footer-input" type="email" formControlName="email" placeholder="Enter your email" [(ngModel)]="email" required/>
+                        <button [disabled]="!subscribeForm.valid" class="subscribe-footer-btn" (click)="onSubscribe()">Subscribe
+                            <img src="assets/images/message.svg"/>
+                        </button>
+                    </form>
                 </div>
                 <div class="col-md-3 social-footer-wrap">
                     <ul class="social-footer">
@@ -139,3 +121,4 @@
         </div>
     </div>
 </div>
+<app-subscribe-popup (onPopupClose)="onPopupClose($event)" [active]="subscribeFormShow"></app-subscribe-popup>

@@ -68,40 +68,6 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none;
 }
-.social-nets-filter-wrap {
-    float: right;
-    margin-top: 15px;
-    overflow: hidden;
-    max-height: 45px;
-}
-.social-nets-filter-i {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    transition: all 0.2s;
-} 
-.social-nets-filter-i:hover {
-    opacity: 0.6;
-}
-.social-nets-filter-left {
-    display: inline-block;
-    max-width: 140px;
-}
-.social-nets-filter-left a:first-child {
-    margin-left: 0;
-}
-.social-nets-filter-plus {
-    margin-left: 10px;
-    border: 1px solid #d50000;
-    border-radius: 50%;
-    display: inline-block;
-    vertical-align: top;
-    transition: all 0.3s;
-}
-.social-nets-filter-plus img {
-    padding: 9px;
-    cursor: pointer;
-}
 .slideup, .slidedown {          
     overflow-y: hidden;
     -webkit-transition: all 0.5s ease-in-out;
@@ -115,26 +81,6 @@
 .filter-section.slideup {
     max-height: 0;
 }
-.social-nets-filter-left.slidedown {
-    max-width: 290px;             
-    -webkit-transition: max-width 0.3s ease-in-out;
-    -moz-transition: max-width 0.3s ease-in-out;
-    -o-transition: max-width 0.3s ease-in-out;
-    transition: max-width 0.3s ease-in-out;    
-}
-.social-nets-filter-left.slideup {
-    max-height: 140px;
-    -webkit-transition: max-width 0.3s ease-in-out;
-    -moz-transition: max-width 0.3s ease-in-out;
-    -o-transition: max-width 0.3s ease-in-out;
-    transition: max-width 0.3s ease-in-out;
-}
-.social-nets-filter-plus.cross {
-    -moz-transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
-    transform:rotate(-45deg);
-}
-
 .book-author-name {
     margin-top: 80px;
     font-size: 36px;
@@ -218,7 +164,7 @@
     border-radius: 15px;
     background-size: cover;
     background-position: center;
-    box-shadow: 4px 4px 4px #ccc;
+    /*box-shadow: 4px 4px 4px #ccc;*/
 }
 .book-author {
     font-size: 15px;
@@ -245,15 +191,10 @@
 .related-wrap .book-item:first-child {
     margin-left: 0;
 }
-.social-nets-filter-wrap-bot {
-    position: relative!important;
-    text-align: center;
-    margin: 20px 0 65px;
-    float: none;
-    bottom: 0!important;
+app-social-bar.mobile {
+    margin-bottom: 65px;
+    display: block;
 }
-
-
 
 @media (min-width: 1024px) and (max-width: 1279px) {
     .container {
@@ -337,11 +278,6 @@
     }
     .amazon-link-wrap {
         text-align: center;
-    }
-    .social-nets-filter-wrap {
-        position: absolute;
-        right: 0;
-        bottom: -55px;
     }
 }
 @media (min-width: 769px) and (max-width: 869px) {
