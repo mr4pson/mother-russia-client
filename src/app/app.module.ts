@@ -4,6 +4,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgxY2PlayerModule } from 'ngx-y2-player';
 import { HttpClientModule } from '@angular/common/http';
 import { SafeHtmlPipe } from "./_pipes/safehtml";
+import { StripHtmlPipe } from "./_pipes/striphtml.pipe";
 import { ReactiveFormsModule }    from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -56,6 +57,7 @@ import { BlockerInstructionsComponent } from './blocker-instructions/blocker-ins
     LearnComponent,
     RussianLanguageComponent,
     SafeHtmlPipe,
+    StripHtmlPipe,
     AboutComponent,
     TravelComponent,
     ArticleComponent,
@@ -79,7 +81,8 @@ import { BlockerInstructionsComponent } from './blocker-instructions/blocker-ins
     DxScrollViewModule 
   ],
   providers: [
-    ImageService
+    ImageService,
+    StripHtmlPipe
   ],
   bootstrap: [AppComponent]
 })

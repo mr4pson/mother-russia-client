@@ -9,7 +9,7 @@ import { HostListener } from '@angular/core';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-listen-detail',
@@ -54,7 +54,7 @@ export class ListenDetailComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.innerWidth = window.screen.width;
     this.titleService.setTitle("Listen");
     this.getSinger();
@@ -67,13 +67,13 @@ export class ListenDetailComponent implements OnInit {
         this.singer.tracklist.length > 0 ? this.songActive = this.singer.tracklist[0] : null;
         this.title = "Listen - " + this.singer.name;
         this.titleService.setTitle(this.title);
-        setTimeout(function() {
-          var image = document.createElement('img');
-          image.src = globals.getBgUrl($('.top-image-content')[0]);
-          image.onload = function () {
-            $('.loader-wrap').fadeOut();
-          };
-        }, 100);
+        // setTimeout(function() {
+        //   var image = document.createElement('img');
+        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+        //   image.onload = function () {
+        //     $('.loader-wrap').fadeOut();
+        //   };
+        // }, 100);
       });
   }
   getBckgndImageUrl(imageUrl) {

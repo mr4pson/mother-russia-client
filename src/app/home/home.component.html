@@ -5,21 +5,6 @@
                     (breakpoint)="breakpoint($event)"
                     (afterChange)="afterChange($event)"
                     (beforeChange)="beforeChange($event)">
-  <!--div ngxSlickItem class="top item slide top1" style="background-image: url(assets/images/learn.png);">
-    <div class="container">
-        <div class="top-content">
-            <div class="top-h">Learn</div>
-            <div class="top-h3">Explore Russian Language</div>
-            <ul class="top-advantages hidden-xs">
-                <li>Practice Russian at different levels</li>
-                <li>Watch Russian movies with subtitles</li>
-                <li>Listen Russain music with translated lyrics</li>
-                <li>Read Russian books</li>
-                <li>Learn Russain playing games!</li>
-            </ul>
-        </div>
-    </div>
-  </div-->
     <div *ngFor="let slider of sliders; let i = index" ngxSlickItem class="top item slide" [ngClass]="'top'+(i+1)" [style.backgroundImage]="getBckgndImageUrl(slider.image)">
         <div class="container">
             <div class="top-content">
@@ -83,46 +68,24 @@
                   <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photoTall +')'"></div>
                   <div class="outside">
                       <div class="content">
-                          <div class="sec-h">{{ article.title }}</div>
+                          <div class="sec-h">{{ article.title | striphtml }}</div>
                       </div>
                       <div class="filler"></div>
                   </div>
               </a>
           </div>
-          <!--div class="top-section col-md-3 col-sm-4">
-              <a href="#" class="sec-item zoom-item">
-                  <div class="inside" style="background-image: url(assets/images/top-sec5.png)"></div>
-                  <div class="outside">
-                      <div class="content">
-                          <div class="sec-h">12 Reasons Everyone Must Visit Russia</div>
-                      </div>
-                      <div class="filler"></div>
-                  </div>
-              </a>
-          </div>
-          <div class="top-section col-md-3 col-sm-4">
-              <a href="#" class="sec-item zoom-item">
-                  <div class="inside" style="background-image: url(assets/images/top-sec6.png)"></div>
-                  <div class="outside">
-                      <div class="content">
-                          <div class="sec-h">FIFA World Cup in Russia</div>
-                      </div>
-                  </div>
-              </a>
-          </div-->
-      <!--div class="bot-sections row"-->
         <div class="sub-bot-secion">
             <div *ngFor="let article of bottomArticlesLeft" class="bot-section col-md-4 col-sm-4">
                 <a [routerLink]="article.section+'/'+article.url" class="bot-sec-item zoom-item">
                     <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photo +')'"></div>
                     <div class="outside">
                         <div class="content">
-                            <div class="sec-h">{{ article.title }}</div>
+                            <div class="sec-h">{{ article.title | striphtml }}</div>
                             <div class="preview">{{ article.preview }}</div>
                         </div>
                     </div>
                     <div class="filler">
-                        <div class="filler-h">{{ article.title }}</div>
+                        <div class="filler-h">{{ article.title | striphtml }}</div>
                         <div class="filler-preview">{{ article.preview }}</div>
                     </div>
                 </a>
@@ -133,17 +96,16 @@
                 <div class="inside fr-dark" [style.backgroundImage]="'url('+baseURI+'/uploads/'+article.photo +')'"></div>
                 <div class="outside">
                     <div class="content">
-                        <div class="sec-h">{{ article.title }}</div>
+                        <div class="sec-h">{{ article.title | striphtml }}</div>
                         <div class="preview">{{ article.preview }}</div>
                     </div>
                 </div>
                 <div class="filler">
-                    <div class="filler-h">{{ article.title }}</div>
+                    <div class="filler-h">{{ article.title | striphtml }}</div>
                     <div class="filler-preview">{{ article.preview }}</div>
                 </div>
             </a>
         </div>
       </div>
-      <!--/div-->
     </div>
 </div>

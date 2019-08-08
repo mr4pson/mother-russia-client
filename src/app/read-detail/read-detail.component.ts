@@ -7,7 +7,7 @@ import { Author } from '../_models/bookAuthor';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-read-detail',
@@ -34,7 +34,7 @@ export class ReadDetailComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.titleService.setTitle("Read");
     this.getAuthor();
   }
@@ -48,13 +48,13 @@ export class ReadDetailComponent implements OnInit {
           this.getRelatedBooks();
           this.title = "Read - " + this.author.name;
           this.titleService.setTitle(this.title);
-          setTimeout(function() {
-            var image = document.createElement('img');
-            image.src = globals.getBgUrl($('.top-image-content')[0]);
-            image.onload = function () {
-              $('.loader-wrap').fadeOut();
-            };
-          }, 100);
+          // setTimeout(function() {
+          //   var image = document.createElement('img');
+          //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+          //   image.onload = function () {
+          //     $('.loader-wrap').fadeOut();
+          //   };
+          // }, 100);
         }
       );
   }

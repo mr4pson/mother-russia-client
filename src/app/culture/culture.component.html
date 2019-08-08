@@ -21,7 +21,7 @@
             <div class="inside"  [style.backgroundImage]="getBckgndImageUrl(article.photo)"></div>
             <div class="outside">
               <div class="content">
-                <div class="sec-h">{{ article.title }}</div>
+                <div class="sec-h">{{ article.title | striphtml }}</div>
                 <div class="preview">{{ article.preview }}</div>
               </div>
               <div class="filler"></div>

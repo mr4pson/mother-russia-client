@@ -11,7 +11,7 @@ import { Title } from "@angular/platform-browser";
 import { ConjugatedVerb } from '../_models/conjugated-verb';
 import { ImageService } from './../_services/image.service';
 
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-russian-language',
@@ -96,13 +96,13 @@ export class RussianLanguageComponent implements OnInit {
     this.russianLanguageService.getComponent()
       .subscribe(component => {
         this.component = component.data;
-        setTimeout(function() {
-          var image = document.createElement('img');
-          image.src = globals.getBgUrl($('.top-image-content')[0]);
-          image.onload = function () {
-            $('.loader-wrap').fadeOut();
-          };
-        }, 100);
+        // setTimeout(function() {
+        //   var image = document.createElement('img');
+        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+        //   image.onload = function () {
+        //     //$('.loader-wrap').fadeOut();
+        //   };
+        // }, 100);
       });
   }
   getCategory(url): void {
@@ -163,7 +163,7 @@ export class RussianLanguageComponent implements OnInit {
       if (this.curCategory.url == 'Russian-Conjugated-Verbs' && !this.urlverb) {
         this.getConjugatedVerbs();
       } else {
-        this.getConjugatedVerb(this.urlverb);
+        this.urlverb ? this.getConjugatedVerb(this.urlverb) : null;
       }
       this.title = "Russian language - " + this.curCategory.name;
       this.titleService.setTitle(this.title);
@@ -175,7 +175,7 @@ export class RussianLanguageComponent implements OnInit {
   ngOnInit() {
     this.title = "Russian language - Russian alphabet";
     this.titleService.setTitle(this.title);
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.getSections();
     this.getComponent();
   }

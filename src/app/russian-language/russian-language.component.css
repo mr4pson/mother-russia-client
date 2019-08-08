@@ -19,9 +19,9 @@
 }
 .top-image-content {
     height: 380px;
-    background-size: contain;
-    background-position: center;
+    background-position: center -40px;
     background-repeat: no-repeat;
+    position: relative;
 }
 .top-image-content .top-h {
     text-align: center;
@@ -235,7 +235,7 @@ table tr:nth-child(2n+1) {
 
 @media (min-width: 320px) and (max-width: 1280px) {
     .top-image-content {
-        background-size: cover;
+        background-position: center 0;
     }
 }
 @media (min-width: 769px) and (max-width: 1023px) {
@@ -308,7 +308,7 @@ table tr:nth-child(2n+1) {
         font-size: 48px;
         line-height: 48px;
         padding-left: 20px;
-        word-break: break-all;
+        /*word-break: break-all;*/
     }
     .left-bar.active {
         transform: none;
@@ -347,6 +347,47 @@ table tr:nth-child(2n+1) {
         font-size: 46px;
         padding-left: 0;
         word-break: unset;
+    }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+    .top-image-content .top-h {
+        font-size: 48px;
+        line-height: 48px;
+        /*word-break: break-all;*/
+    }
+    .wrap .container {
+        max-width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .top-image-content .top-h {
+        font-size: 30px!important;
+        line-height: 46px;
+        text-align: left;
+        padding: 0 15px!important;
+        bottom: 15px;
+        letter-spacing: 0;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        min-height: 92px;
+    }
+    .top-image-content {
+        height: 490px;
+    }
+}
+@media (min-width: 768px) and (max-width: 869px) {
+    .top-h {
+        margin: 0 0 0 20px!important;
+        padding-top: 180px!important;
+        font-size: 120px;
+    }
+    .top-h3 {
+        margin-left: 20px!important;
+        font-size: 28px!important;
+        line-height: 40px!important;
+        padding-top: 10px!important;
     }
 }
 /* russian language */

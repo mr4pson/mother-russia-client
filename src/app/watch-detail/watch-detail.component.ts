@@ -9,7 +9,7 @@ import { HostListener } from '@angular/core';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-watch-detail',
@@ -53,7 +53,7 @@ export class WatchDetailComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.innerWidth = window.screen.width;
     this.titleService.setTitle("Watch");
     this.getWatch();
@@ -84,13 +84,13 @@ export class WatchDetailComponent implements OnInit {
           this.getGenres();
           this.title = "Watch - "+this.watch.name;
           this.titleService.setTitle(this.title);
-          setTimeout(function() {
-            var image = document.createElement('img');
-            image.src = globals.getBgUrl($('.top-image-content')[0]);
-            image.onload = function () {
-              $('.loader-wrap').fadeOut();
-            };
-          }, 100);
+          // setTimeout(function() {
+          //   var image = document.createElement('img');
+          //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+          //   image.onload = function () {
+          //     $('.loader-wrap').fadeOut();
+          //   };
+          // }, 100);
         }
       );
   }

@@ -5,7 +5,7 @@ import { Book } from '../_models/book';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-read',
@@ -27,13 +27,13 @@ export class ReadComponent implements OnInit {
         this.modernBooks = books.data.filter(book => {
           return book.author.categoryId == 2
         });
-        setTimeout(function() {
-          var image = document.createElement('img');
-          image.src = globals.getBgUrl($('.top-image-content')[0]);
-          image.onload = function () {
-            $('.loader-wrap').fadeOut();
-          };
-        }, 100);
+        // setTimeout(function() {
+        //   var image = document.createElement('img');
+        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+        //   image.onload = function () {
+        //     $('.loader-wrap').fadeOut();
+        //   };
+        // }, 100);
       });
   }
   constructor(
@@ -53,7 +53,7 @@ export class ReadComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   initialiseInvites() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.title = "Read";
     this.titleService.setTitle(this.title);
     this.getBooks();

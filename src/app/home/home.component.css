@@ -278,14 +278,17 @@
         line-height: 64px;
         font-size: 64px;
     }
+    .top1 {
+        background-position: 57% 0px;
+    }
     .top2 {
-        background-position: 68% 0px;
+        background-position: 59% 0px;
     }
     .top3 {
-        background-position: 68% 0px;
+        background-position: 64% 0px;
     }
     .top4 {
-        background-position: 27% 0px;
+        background-position: 66% 0px;
     }
     .top-h3 {
         font-size: 20px;

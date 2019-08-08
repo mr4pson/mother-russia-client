@@ -6,7 +6,8 @@ import { HostListener } from '@angular/core';
 import { globals } from '../globals';
 import { ImageService } from './../_services/image.service';
 import { Title } from "@angular/platform-browser";
-declare var $: any;
+import { StripHtmlPipe } from './../_pipes/striphtml.pipe';
+//declare var $: any;
 
 @Component({
   selector: 'app-article',
@@ -27,7 +28,8 @@ export class ArticleComponent implements OnInit {
     private router: Router,
     private articleService: ArticleService,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private stripPipe: StripHtmlPipe
   ) {
     this.innerWidth = window.screen.width;
   }
@@ -35,22 +37,22 @@ export class ArticleComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   ngOnInit() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     let url = this.route.snapshot.paramMap.get('url');
     this.section = this.route.snapshot.paramMap.get('section');
     this.articleService.getArticle(url).subscribe(
       article => {
         article.data.content = globals.createGifffer(article.data.content);
         this.article = article.data;
-        this.title = this.section[0].toUpperCase() + this.section.slice(1) + " - " + this.article.title;
+        this.title = this.stripPipe.transform(this.article.title);
         this.titleService.setTitle(this.title);
-        setTimeout(function() {
-          var image = document.createElement('img');
-          image.src = globals.getBgUrl($('.top-image-content')[0]);
-          image.onload = function () {
-            $('.loader-wrap').fadeOut();
-          };
-        }, 100);
+        // setTimeout(function() {
+        //   var image = document.createElement('img');
+        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+        //   image.onload = function () {
+        //     $('.loader-wrap').fadeOut();
+        //   };
+        // }, 100);
       }
     );
   }

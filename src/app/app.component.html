@@ -5,4 +5,4 @@
     <div class="loader"></div>
 </div>
 <app-adblock *ngIf="showBlockerBar" class="d-none d-md-block" (showInstructions)="showInstructions($event)"></app-adblock>
-<app-blocker-instructions [ngClass]="instructionsShown ? 'active' : ''" [instructionsShown]="instructionsShown"></app-blocker-instructions>
+<app-blocker-instructions *ngIf="showBlockerBar" [ngClass]="instructionsShown ? 'active' : ''" [instructionsShown]="instructionsShown"></app-blocker-instructions>

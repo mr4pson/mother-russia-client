@@ -1,6 +1,7 @@
 export const globals = Object.freeze({
     baseURI: 'http://api.motherrussia.net',
     createGifffer: function (content: string) {
+      content = content.replace(new RegExp('contenteditable="true"', "gm"), '');
       content = content.replace(new RegExp('src="([^"]+)\.gif"', "gm"), 'data-gifffer="$1.gif"');
       setTimeout(()=>{let Gifffer = this.giffferWrap(); Gifffer(); }, 100);
       return content;

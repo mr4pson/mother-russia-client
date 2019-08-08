@@ -6,7 +6,7 @@ import { HostListener } from '@angular/core';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-listen',
@@ -55,13 +55,13 @@ export class ListenComponent implements OnInit {
     let randomSinger = this.singers.sort( function() { return 0.5 - Math.random() } )[0];
     this.header = randomSinger.header;
     this.headerMobile = randomSinger.headerMobile;
-    setTimeout(function() {
-      var image = document.createElement('img');
-      image.src = globals.getBgUrl($('.top-image-content')[0]);
-      image.onload = function () {
-        $('.loader-wrap').fadeOut();
-      };
-    }, 100);
+    // setTimeout(function() {
+    //   var image = document.createElement('img');
+    //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+    //   image.onload = function () {
+    //     $('.loader-wrap').fadeOut();
+    //   };
+    // }, 100);
   }
   getSingers(): void {
     this.singerService.getSingers()
@@ -92,14 +92,16 @@ export class ListenComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   initialiseInvites() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.innerWidth = window.screen.width;
     this.title = "Listen";
     this.titleService.setTitle(this.title);
     this.getSingers();
     this.getGenres();
   }
-
+  onClickFilterClose() {
+    this.filterCloseClicked = !this.filterCloseClicked;
+  }
   ngOnInit() {
   }
   ngOnDestroy() {

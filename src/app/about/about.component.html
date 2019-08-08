@@ -1,9 +1,8 @@
 <div class="top-image">
-  <div class="top-image-content" style="background-image: url(assets/images/about-top.jpg);">
+    <div class="top-image-content" [style.backgroundImage]="component && component.header && innerWidth > 767 ? getBckgndImageUrl(component.header) : component && component.headerMobile && innerWidth <= 767 ? getBckgndImageUrl(component.headerMobile) : ''">
       <div class="container">
           <div class="top-content">
-              <div class="top-h">About</div>
-              <div class="top-h3">Some words about a project</div>
+              <div *ngIf="curSection" class="top-h" [innerHtml]="curSection.name"></div>
           </div>
       </div>
   </div>
@@ -20,15 +19,15 @@
         <app-social-bar [type]="'both'" [title]="title"></app-social-bar>
         <div class="page-wrap">
             <div class="left-bar" [ngClass]="leftBarVisible === true ? 'active' : ''">
-                <div class="left-bar-btn d-block d-md-none" (click)="leftBarVisible = !leftBarVisible">
+                <div class="left-bar-btn d-block d-md-none" (click)="onLeftBarClick()">
                     <div>Contents</div>
                 </div>
                 <div class="inner" *ngIf="curSection">
-                    <a *ngFor="let section of sections" [routerLink]="'/about/'+section.url" [ngClass]="{'active': curSection.url == section.url}" (click)="leftBarVisible = false">{{ section.name }}</a>
+                    <a *ngFor="let section of sections" [routerLink]="'/about/'+section.url" [ngClass]="{'active': curSection.url == section.url}" (click)="hideLeftBar()">{{ section.name | striphtml}}</a>
                     <div *ngIf="sections && sections.length === 0">No sections</div>
                 </div>
             </div>
-            <div class="about-content">
+            <div class="about-content fr-view">
                 <div *ngIf="curSection" class="content" [innerHtml]="curSection.content | safeHtml"></div>
             </div>
         </div>

@@ -22,7 +22,7 @@
             <div class="outside">
               <div class="content">
                 <div class="sec-h">{{ article.title }}</div>
-                <div class="preview">{{ article.preview }}</div>
+                <div class="preview">{{ article.preview | striphtml }}</div>
               </div>
               <div class="filler"></div>
             </div>

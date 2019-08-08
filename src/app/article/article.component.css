@@ -8,7 +8,7 @@
     color: #fff;
     font-weight: 900;
     letter-spacing: 5px;
-    line-height: 70px;
+    line-height: 73px;
     margin-top: 225px;
     max-width: 870px;
 }
@@ -23,7 +23,7 @@
     text-align: center;
     margin: auto;
     position: absolute;
-    bottom: 75px;
+    bottom: 25px;
     left: 0;
     right: 0;
     padding: 0 10px;
@@ -73,7 +73,7 @@
 }
 .wrap .content {
     margin-top: 65px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
 }
 @media (min-width: 320px) and (max-width: 1280px) {
     .top-image-content {
@@ -117,12 +117,14 @@
         padding-right: 10px;
         padding-left: 10px;
     }
-    .top-h {
-        font-size: 64px;
-        padding-top: 0!important;
-        position: absolute;
-        bottom: 50px;
-        left: 0;
+    .top-image-content .top-h {
+        font-size: 30px!important;
+        line-height: 46px;
+        text-align: left;
+        padding: 0 15px!important;
+        bottom: 15px;
+        letter-spacing: 0;
+        min-height: 92px;
     }
     .top-image-content {
         height: 490px;

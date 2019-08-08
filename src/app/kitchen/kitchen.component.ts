@@ -5,7 +5,7 @@ import { ArticleService } from '../_services/article.service';
 import { globals } from '../globals';
 import { ImageService } from './../_services/image.service';
 import { Title } from "@angular/platform-browser";
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-kitchen',
@@ -38,18 +38,18 @@ export class KitchenComponent implements OnInit {
       articles => {
         this.articles = articles.data
         console.log(this.articles);
-        setTimeout(function() {
-          var image = document.createElement('img');
-          image.src = globals.getBgUrl($('.top-image-content')[0]);
-          image.onload = function () {
-            $('.loader-wrap').fadeOut();
-          };
-        }, 100);
+        // setTimeout(function() {
+        //   var image = document.createElement('img');
+        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+        //   image.onload = function () {
+        //     $('.loader-wrap').fadeOut();
+        //   };
+        // }, 100);
       }
     );
   }
   ngOnInit() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
   }
   ngOnDestroy() {
     if (this.navigationSubscription) {

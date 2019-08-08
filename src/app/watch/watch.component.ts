@@ -5,7 +5,7 @@ import { HostListener } from '@angular/core';
 import { globals } from '../globals';
 import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-declare var $: any;
+//declare var $: any;
 
 @Component({
   selector: 'app-watch',
@@ -69,13 +69,13 @@ export class WatchComponent implements OnInit {
     let randomWatch = this.watches.sort( function() { return 0.5 - Math.random() } )[0];
     this.header = randomWatch.header;
     this.headerMobile = randomWatch.headerMobile;
-    setTimeout(function() {
-      var image = document.createElement('img');
-      image.src = globals.getBgUrl($('.top-image-content')[0]);
-      image.onload = function () {
-        $('.loader-wrap').fadeOut();
-      };
-    }, 100);
+    // setTimeout(function() {
+    //   var image = document.createElement('img');
+    //   image.src = globals.getBgUrl($('.top-image-content')[0]);
+    //   image.onload = function () {
+    //     $('.loader-wrap').fadeOut();
+    //   };
+    // }, 100);
   }
   getWatches(): void {
     this.WatchService.getWatches()
@@ -103,7 +103,7 @@ export class WatchComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   ngOnInit() {
-    $('.loader-wrap').show();
+    //$('.loader-wrap').show();
     this.getWatches();
     this.getGenres()
   }

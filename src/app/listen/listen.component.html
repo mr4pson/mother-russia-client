@@ -18,7 +18,7 @@
             <span>Listen</span>
         </div>
         <div class="filter-close-wrap">
-            <div class="filter-close" (click)="filterCloseClicked = !filterCloseClapiicked">
+            <div class="filter-close" (click)="onClickFilterClose()">
                 <span class="title">Filter</span>
                 <img class="chevron-red" [ngClass]="{'up': filterCloseClicked === true}" src="assets/images/chevron-red-up.png"/>
             </div>
@@ -41,8 +41,8 @@
                 </div>
             </div>
             <div class="filter-btn-wrap">
-                <button class="reset-filter-btn" (click)="resetFilter($event)">Reset filter</button>
-                <button class="apply-filter-btn" (click)="applyFilter($event)">Apply filter</button>
+                <button class="reset-filter-btn" (click)="resetFilter()">Reset filter</button>
+                <button class="apply-filter-btn" (click)="applyFilter()">Apply filter</button>
                 <app-social-bar [title]="title" [type]="'pc'"></app-social-bar>
             </div>
         </div>

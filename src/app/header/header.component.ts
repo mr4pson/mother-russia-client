@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   };
   phrase: string;
   searchedLinks: any[];
+  menuClicked: boolean = false;
   searchForm = new FormGroup({
     phrase: new FormControl(''),
   });
@@ -50,11 +51,16 @@ export class HeaderComponent implements OnInit {
       });
     }
   }
+  clickMenu() {
+    this.menuClicked = !this.menuClicked;
+  }
   hideMenu() {
-    let hamburger: HTMLElement = document.getElementById('hamburger');
-    hamburger.click();
-    this.searchedLinks = [];
-    this.phrase = '';
+    if (this.menuClicked) {
+      let hamburger: HTMLElement = document.getElementById('hamburger');
+      hamburger.click();
+      this.searchedLinks = [];
+      this.phrase = '';
+    }
   }
  
 

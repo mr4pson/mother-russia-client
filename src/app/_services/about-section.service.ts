@@ -7,6 +7,10 @@ import { globals } from './../globals';
   providedIn: 'root'
 })
 export class AboutSectionService {
+  getComponent() {
+    return this.http.get<Data>(globals.baseURI+'/aboutPage');
+  }
+  
   getSection(url: string) {
     return this.http.get<Data>(globals.baseURI+'/aboutSectionsByUrl/'+url);
   }

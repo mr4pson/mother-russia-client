@@ -2,7 +2,7 @@
     <div class="top-image-content" [style.backgroundImage]="article && article.header && innerWidth > 767 ? getBckgndImageUrl(article.header) : article && article.headerMobile && innerWidth <= 767 ? getBckgndImageUrl(article.headerMobile) : ''">
         <div class="container">
             <div class="top-content">
-                <div *ngIf="article" class="top-h">{{ article.title }}</div>
+                <div *ngIf="article" class="top-h">{{ article.title | striphtml }}</div>
                 <!--div class="top-h3">Explore Russian language</div-->
             </div>
         </div>
@@ -15,7 +15,7 @@
             <span class="active">/</span>
             <a [routerLink]="['/'+section]">{{ section | titlecase }}</a>
             <span class="active">/</span>
-            <span *ngIf="article">{{ article.title }}</span>
+            <span *ngIf="article">{{ article.title | striphtml }}</span>
         </div>
         <app-social-bar [title]="title" [type]="'pc'"></app-social-bar>
         <div class="content">
