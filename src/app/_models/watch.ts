@@ -19,4 +19,6 @@ export class Watch {
     imdbURL: string;
     subtitlesTypeId: number;
     sovietmoviesSubtitles: string;
+    metaTitle: string;
+    metaDescription: string;
   }

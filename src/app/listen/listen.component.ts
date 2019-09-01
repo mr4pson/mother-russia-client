@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit , Inject} from '@angular/core';
 import { Singer } from '../_models/singer';
 import { Router, NavigationEnd } from '@angular/router';
 import { SingerService } from '../_services/singer.service';
 import { HostListener } from '@angular/core';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
+import { PageService } from './../_services/page.service';
+import { Title, Meta } from "@angular/platform-browser";
+import { Page } from './../_models/page';
 
 @Component({
   selector: 'app-listen',
@@ -26,7 +27,22 @@ export class ListenComponent implements OnInit {
   title: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = this.window.innerWidth;
+  }
+  constructor(@Inject(WINDOW) private window: Window, 
+    private singerService: SingerService,
+    private titleService:Title,
+    private router: Router,
+    private imageService: ImageService,
+    private pageService: PageService,
+    private meta: Meta
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+    
   }
   removeGenre(id) {
     let curGenre = this.filteredSingerGenres.find(genre => genre.id === id);
@@ -39,7 +55,7 @@ export class ListenComponent implements OnInit {
       }).length > 0
     ).sort(function() {
       return .5 - Math.random();
-    });/*.sort(compare);*/
+    });
   }
   getGenres() {
     this.singerService.getGenres()
@@ -48,20 +64,13 @@ export class ListenComponent implements OnInit {
   resetFilter() {
     this.filteredSingers = JSON.parse(JSON.stringify(this.singers)).sort(function() {
       return .5 - Math.random();
-    });/*.sort(compare);*/
+    });
     this.getGenres();
   }
   getRandomHeader() {
     let randomSinger = this.singers.sort( function() { return 0.5 - Math.random() } )[0];
     this.header = randomSinger.header;
     this.headerMobile = randomSinger.headerMobile;
-    // setTimeout(function() {
-    //   var image = document.createElement('img');
-    //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-    //   image.onload = function () {
-    //     $('.loader-wrap').fadeOut();
-    //   };
-    // }, 100);
   }
   getSingers(): void {
     this.singerService.getSingers()
@@ -69,33 +78,26 @@ export class ListenComponent implements OnInit {
         {
           this.singers = singers.data.sort(function() {
             return .5 - Math.random();
-          });/*.sort(compare);*/
+          });
           this.filteredSingers = JSON.parse(JSON.stringify(this.singers));
           this.getRandomHeader();
         }
       );
   }
-  constructor(
-    private singerService: SingerService,
-    private titleService:Title,
-    private router: Router,
-    private imageService: ImageService
-  ) {
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.initialiseInvites();
-      }
-    });
-    
-  }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   initialiseInvites() {
-    //$('.loader-wrap').show();
-    this.innerWidth = window.screen.width;
+    this.innerWidth = this.window.screen.width;
     this.title = "Listen";
     this.titleService.setTitle(this.title);
+    this.pageService.getPageData('/listenPage').subscribe(pageData => {
+      let page: Page = pageData.data;
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
     this.getSingers();
     this.getGenres();
   }

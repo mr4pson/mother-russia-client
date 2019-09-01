@@ -4,10 +4,8 @@ import { Location } from '@angular/common';
 import { Book } from '../_models/book';
 import { BookService } from '../_services/book.service';
 import { Author } from '../_models/bookAuthor';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
 
 @Component({
   selector: 'app-read-detail',
@@ -25,7 +23,8 @@ export class ReadDetailComponent implements OnInit {
     private BookService: BookService,
     private location: Location,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private meta: Meta
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
@@ -34,42 +33,32 @@ export class ReadDetailComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    //$('.loader-wrap').show();
     this.titleService.setTitle("Read");
     this.getAuthor();
   }
   getAuthor(): void {
     const url = this.route.snapshot.paramMap.get('url');
-    this.BookService.getAuthor(url)
-      .subscribe(author => 
-        {
-          this.author = author.data;
-          console.log(this.author);
-          this.getRelatedBooks();
-          this.title = "Read - " + this.author.name;
-          this.titleService.setTitle(this.title);
-          // setTimeout(function() {
-          //   var image = document.createElement('img');
-          //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-          //   image.onload = function () {
-          //     $('.loader-wrap').fadeOut();
-          //   };
-          // }, 100);
-        }
-      );
+    this.BookService.getAuthor(url).subscribe(author => 
+      {
+        this.author = author.data;
+        this.getRelatedBooks();
+        this.titleService.setTitle(this.author.metaTitle);
+        this.title = this.author.metaTitle;
+        this.meta.updateTag({name: 'description', content: this.author.metaDescription});
+      }
+    );
   }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   getRelatedBooks(): void {
-    this.BookService.getBooks()
-        .subscribe(books => this.relatedBooks = books.data.filter( 
-          book => {
-            return book.author.categoryId == this.author.categoryId && this.author.id != book.author.id;
-          }).sort(function() {
-            return .5 - Math.random();
-          }).slice(0, 6)
-        );
+    this.BookService.getBooks().subscribe(books => {
+      this.relatedBooks = books.data.filter(book => {
+        return book.author.categoryId == this.author.categoryId && this.author.id != book.author.id;
+      }).sort(function() {
+        return .5 - Math.random();
+      }).slice(0, 6)
+    });
   }
   ngOnInit() {
   }

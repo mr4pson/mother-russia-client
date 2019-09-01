@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
-import { globals } from '../globals';
-//declare var $: any;
+import { PageService } from './../_services/page.service';
+import { Title, Meta } from "@angular/platform-browser";
+import { Page } from './../_models/page';
 
 @Component({
   selector: 'app-learn',
@@ -11,20 +11,20 @@ import { globals } from '../globals';
 export class LearnComponent implements OnInit {
 
   constructor(
-    private titleService:Title
+    private titleService:Title,
+    private pageService: PageService,
+    private meta: Meta
   ) {
-    this.titleService.setTitle("Learn");
+    this.pageService.getPageData('/learnPage').subscribe(pageData => {
+      let page: Page = pageData.data;
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
   }
 
   ngOnInit() {
-    // $('.loader-wrap').show();
-    // setTimeout(function() {
-    //   var image = document.createElement('img');
-    //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-    //   image.onload = function () {
-    //     $('.loader-wrap').fadeOut();
-    //   };
-    // }, 100);
   }
 
 }

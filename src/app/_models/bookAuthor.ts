@@ -6,4 +6,6 @@ export class Author {
     nameRus: string;
     categoryId: number;
     books: Book[];
+    metaTitle: string;
+    metaDescription: string;
 }

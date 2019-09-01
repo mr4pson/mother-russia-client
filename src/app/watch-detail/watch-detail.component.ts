@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, ViewChild , Inject} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Watch } from '../_models/watch';
@@ -6,10 +7,8 @@ import { WatchGenre } from '../_models/watch-genre';
 import { WatchService } from '../_services/watch.service';
 import { NgxY2PlayerComponent, NgxY2PlayerOptions } from 'ngx-y2-player';
 import { HostListener } from '@angular/core';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
 
 @Component({
   selector: 'app-watch-detail',
@@ -25,7 +24,6 @@ export class WatchDetailComponent implements OnInit {
     playerVars: {
       autoplay: 0,
     },
-    // aspectRatio: (3 / 4), // you can set ratio of aspect ratio to auto resize with
   };
 
   watches: Watch[] = [];
@@ -36,15 +34,16 @@ export class WatchDetailComponent implements OnInit {
   title: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = this.window.innerWidth;
   }
-  constructor(
+  constructor(@Inject(WINDOW) private window: Window, 
     private router: Router,
     private route: ActivatedRoute,
     private WatchService: WatchService,
     private location: Location,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private meta: Meta
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
@@ -54,7 +53,7 @@ export class WatchDetailComponent implements OnInit {
   }
   initialiseInvites() {
     //$('.loader-wrap').show();
-    this.innerWidth = window.screen.width;
+    this.innerWidth = this.window.screen.width;
     this.titleService.setTitle("Watch");
     this.getWatch();
   }
@@ -77,38 +76,29 @@ export class WatchDetailComponent implements OnInit {
   }
   getWatch(): void {
     const url = this.route.snapshot.paramMap.get('url');
-    this.WatchService.getWatch(url)
-      .subscribe(
-        watch => {
-          this.watch = watch.data;
-          this.getGenres();
-          this.title = "Watch - "+this.watch.name;
-          this.titleService.setTitle(this.title);
-          // setTimeout(function() {
-          //   var image = document.createElement('img');
-          //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-          //   image.onload = function () {
-          //     $('.loader-wrap').fadeOut();
-          //   };
-          // }, 100);
-        }
-      );
+    this.WatchService.getWatch(url).subscribe(watch => {
+        this.watch = watch.data;
+        this.getGenres();
+        this.title = this.watch.metaTitle;
+        this.titleService.setTitle(this.watch.metaTitle);
+        this.meta.updateTag({name: 'description', content: this.watch.metaDescription});
+      }
+    );
   }
   getRelatedWatches(): void {
-    this.WatchService.getWatches()
-        .subscribe(watches => this.watches = watches.data.filter( 
-          watch => {
-            return watch.genres.some(genres => this.watch.genres.includes(genres)) && this.watch.id != watch.id;
-          }).sort(function() {
-            return .5 - Math.random();
-          }).slice(0, 6)
-        );
+    this.WatchService.getWatches().subscribe(watches => 
+      this.watches = watches.data.filter(watch => {
+        return watch.genres.some(genres => this.watch.genres.includes(genres)) && this.watch.id != watch.id;
+      }).sort(function() {
+        return .5 - Math.random();
+      }).slice(0, 6)
+    );
   }
   ngOnInit() {
     
   }
   onReady(event) {
-    console.log('ready');                                                                                                                                                                                                                                                                 
+    console.log('ready');
   }
   ngOnDestroy() {
     if (this.navigationSubscription) {

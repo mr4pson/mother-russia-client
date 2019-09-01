@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, ViewChild , Inject} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Singer } from '../_models/singer';
@@ -6,10 +7,8 @@ import { Song } from '../_models/song';
 import { SingerService } from '../_services/singer.service';
 import { NgxY2PlayerComponent, NgxY2PlayerOptions } from 'ngx-y2-player';
 import { HostListener } from '@angular/core';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
 
 @Component({
   selector: 'app-listen-detail',
@@ -26,7 +25,6 @@ export class ListenDetailComponent implements OnInit {
     playerVars: {
       autoplay: 0,
     },
-    // aspectRatio: (3 / 4), // you can set ratio of aspect ratio to auto resize with
   };
   singer: Singer;
   songActive: Song = {id: 0, name: '', nameRus: '', translit: '', youtube: '', rusLyrics: '', engLyrics: ''};
@@ -37,15 +35,16 @@ export class ListenDetailComponent implements OnInit {
   title: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = this.window.innerWidth;
   }
-  constructor(
+  constructor(@Inject(WINDOW) private window: Window, 
     private route: ActivatedRoute,
     private router: Router,
     private SingerService: SingerService,
     private location: Location,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private meta: Meta
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
@@ -54,27 +53,19 @@ export class ListenDetailComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    //$('.loader-wrap').show();
-    this.innerWidth = window.screen.width;
+    this.innerWidth = this.window.screen.width;
     this.titleService.setTitle("Listen");
     this.getSinger();
   }
   getSinger(): void {
     const url = this.route.snapshot.paramMap.get('url');
-    this.SingerService.getSinger(url)
-      .subscribe(singer => {
-        this.singer = singer.data;
-        this.singer.tracklist.length > 0 ? this.songActive = this.singer.tracklist[0] : null;
-        this.title = "Listen - " + this.singer.name;
-        this.titleService.setTitle(this.title);
-        // setTimeout(function() {
-        //   var image = document.createElement('img');
-        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-        //   image.onload = function () {
-        //     $('.loader-wrap').fadeOut();
-        //   };
-        // }, 100);
-      });
+    this.SingerService.getSinger(url).subscribe(singer => {
+      this.singer = singer.data;
+      this.singer.tracklist.length > 0 ? this.songActive = this.singer.tracklist[0] : null;
+      this.title = this.singer.metaTitle;
+      this.titleService.setTitle(this.singer.metaTitle);
+      this.meta.updateTag({name: 'description', content: this.singer.metaDescription});
+    });
   }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);

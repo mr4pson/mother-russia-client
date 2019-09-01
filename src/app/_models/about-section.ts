@@ -3,4 +3,6 @@ export class AboutSection {
     name: string;
     content: string;
     url: string;
+    metaTitle: string;
+    metaDescription: string;
 }

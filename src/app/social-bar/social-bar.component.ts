@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, Input , Inject} from '@angular/core';
 
 @Component({
   selector: 'app-social-bar',
@@ -12,7 +13,7 @@ export class SocialBarComponent implements OnInit {
   pagePath: string;
   @Input() vertical: boolean;
   @Input() title: string;
-  constructor() {
+  constructor(@Inject(WINDOW) private window: Window, ) {
     this.pagePath = window.location.href;
   }
   ngOnInit() {

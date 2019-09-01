@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { ArticleService } from '../_services/article.service';
 import { SliderService } from './../_services/slider.service';
 import { ImageService } from './../_services/image.service';
+import { PageService } from './../_services/page.service';
 import { Article } from '../_models/article';
 import { Slider } from './../_models/slider';
+import { Page } from './../_models/page';
 declare var $: any;
 
 
@@ -50,9 +52,17 @@ export class HomeComponent implements OnInit {
     private titleService: Title,
     private articleService: ArticleService,
     private sliderService: SliderService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private meta: Meta,
+    private pageService: PageService,
   ) {
-    this.titleService.setTitle("MotherRussia.net");
+    this.pageService.getPageData('/homePage').subscribe(pageData => {
+      let page: Page = pageData.data;
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
   }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);

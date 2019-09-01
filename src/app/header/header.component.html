@@ -20,7 +20,8 @@
                     <dx-scroll-view
                         [height]="120"
                         [width]="160"
-                        direction="both">
+                        direction="both"
+                        showScrollbar="always">
                             <div id="content">
                                 <a *ngFor="let link of searchedLinks" [routerLink]="link.url" class="search-res-item">{{ link.name }}</a>
                             </div>

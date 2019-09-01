@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit , Inject} from '@angular/core';
 declare var $: any;
 @Component({
   selector: 'app-scroll-to-top',
@@ -6,7 +7,7 @@ declare var $: any;
   styleUrls: ['./scroll-to-top.component.css']
 })
 export class ScrollToTopComponent implements OnInit {
-  constructor() { }
+  constructor(@Inject(WINDOW) private window: Window, ) { }
 
   ngOnInit() {
     $("button.scroltop").on('click', function() {
@@ -16,17 +17,17 @@ export class ScrollToTopComponent implements OnInit {
 			return false;
 		});
 
-		$(window).on("scroll", function() {
-			var scroll = $(window).scrollTop();
+		$(this.window).on("scroll", function() {
+			var scroll = $(this.window).scrollTop();
 			if (scroll > 900) {
 				$("button.scroltop").fadeIn(1000);
 			} else {
 				$("button.scroltop").fadeOut(1000);
 			}
     });
-    $(window).on('scroll', function () {
+    $(this.window).on('scroll', function () {
       // > Window on scroll header color fill 
-      var scroll = $(window).scrollTop();
+      var scroll = $(this.window).scrollTop();
       if(scroll >= 100) {
           $(".is-fixed").addClass("color-fill");
       } else {

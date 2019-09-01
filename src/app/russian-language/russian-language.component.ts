@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit , Inject} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { LanguageSectionService } from '../_services/language-section.service';
 import { LanguageSection } from '../_models/language-section';
@@ -7,11 +8,9 @@ import { ConjugatedVerbService } from '../_services/conjugated-verb.service';
 import { RussianLanguage } from '../_models/russianLanguage';
 import { HostListener } from '@angular/core';
 import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { Title, Meta } from "@angular/platform-browser";
 import { ConjugatedVerb } from '../_models/conjugated-verb';
 import { ImageService } from './../_services/image.service';
-
-//declare var $: any;
 
 @Component({
   selector: 'app-russian-language',
@@ -40,17 +39,18 @@ export class RussianLanguageComponent implements OnInit {
   urlParam: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = this.window.innerWidth;
   }
   navigationSubscription;
-  constructor(
+  constructor(@Inject(WINDOW) private window: Window, 
     private languageSectionService: LanguageSectionService,
     private russianLanguageService: RussianLanguageService,
     private conjugatedVerbService: ConjugatedVerbService,
     private route: ActivatedRoute,
     private router: Router,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private meta: Meta
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
@@ -59,7 +59,7 @@ export class RussianLanguageComponent implements OnInit {
     });
   }
   initialiseInvites() {
-    this.innerWidth = window.screen.width;
+    this.innerWidth = this.window.screen.width;
     this.categoryType = this.route.snapshot.paramMap.get('categoryType');
     this.urlParam = this.route.snapshot.paramMap.get('url');
     this.urlverb = this.route.snapshot.paramMap.get('urlverb');
@@ -73,46 +73,37 @@ export class RussianLanguageComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   getSections(): void {
-    this.languageSectionService.getSections()
-      .subscribe(sections => {
-        this.sections = sections.data;
-        this.sections.forEach(section => {
-          section.categories.forEach((category, index) => {
-            if (category.subCategories.length > 0 && section.id != 1) {
-              this.categoryBtnsClicked[category.id] = false;
-            } else {
-              this.categoryBtnsClicked[category.id] = true;
-            }
-            this.categoryChildWrapsHeight[category.id] = category.subCategories.length*24;
-          });
+    this.languageSectionService.getSections().subscribe(sections => {
+      this.sections = sections.data;
+      this.sections.forEach(section => {
+        section.categories.forEach((category, index) => {
+          if (category.subCategories.length > 0 && section.id != 1) {
+            this.categoryBtnsClicked[category.id] = false;
+          } else {
+            this.categoryBtnsClicked[category.id] = true;
+          }
+          this.categoryChildWrapsHeight[category.id] = category.subCategories.length*24;
         });
-        if (!this.categoryType) {
-          this.curCategory = this.sections[0].categories[0];
-          this.getCategory(this.curCategory.url);
-        }
       });
+      if (!this.categoryType) {
+        this.curCategory = this.sections[0].categories[0];
+        this.getCategory(this.curCategory.url);
+      }
+    });
   }
   getComponent(): void {
-    this.russianLanguageService.getComponent()
-      .subscribe(component => {
-        this.component = component.data;
-        // setTimeout(function() {
-        //   var image = document.createElement('img');
-        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-        //   image.onload = function () {
-        //     //$('.loader-wrap').fadeOut();
-        //   };
-        // }, 100);
-      });
+    this.russianLanguageService.getComponent().subscribe(component => {
+      this.component = component.data;
+    });
   }
   getCategory(url): void {
-    this.languageSectionService.getCategory(url)
-      .subscribe(category => {
-        category.data.content = globals.createGifffer(category.data.content);
-        this.curCategory = category.data;
-        this.title = "Russian language - " + this.curCategory.name;
-        this.titleService.setTitle(this.title);
-      })
+    this.languageSectionService.getCategory(url).subscribe(category => {
+      category.data.content = globals.clearEditable(category.data.content);
+      category.data.id !== 6 ? category.data.content = globals.createGifffer(category.data.content) : null;
+      this.curCategory = category.data;
+      this.titleService.setTitle(this.curCategory.metaTitle);
+      this.meta.updateTag({name: 'description', content: this.curCategory.metaDescription});
+    });
   }
   getConjugatedVerbs() {
     this.conjugatedVerbService.getConjugatedVerbs().subscribe(items => {
@@ -126,7 +117,7 @@ export class RussianLanguageComponent implements OnInit {
       }, {})
       groupedData['Ё'] = {group: 'Ё', children: []};
       groupedData['Ф'] = {group: 'Ф', children: []};
-      groupedData['Ш'] = {group: 'Ш', children: []};
+      //groupedData['Ш'] = {group: 'Ш', children: []};
       groupedData['Щ'] = {group: 'Щ', children: []};
       groupedData['Ь'] = {group: 'Ь', children: []};
       groupedData['Ы'] = {group: 'Ы', children: []};
@@ -146,10 +137,11 @@ export class RussianLanguageComponent implements OnInit {
   }
   getConjugatedVerb(url) {
     this.conjugatedVerbService.getConjugatedVerb(url).subscribe(verb => {
+      verb.data.content = globals.clearEditable(verb.data.content);
       verb.data.content = globals.createGifffer(verb.data.content);
       this.curCategory = verb.data;
-      this.title = "Russian language - " + this.curCategory.name;
-      this.titleService.setTitle(this.title);
+      this.titleService.setTitle(this.curCategory.metaTitle);
+      this.meta.updateTag({name: 'description', content: this.curCategory.metaDescription});
     })
   }
 
@@ -158,6 +150,7 @@ export class RussianLanguageComponent implements OnInit {
   }
   getSubCategory(url): void {
     this.languageSectionService.getSubCategory(url).subscribe(category => {
+      category.data.content = globals.clearEditable(category.data.content);
       category.data.content = globals.createGifffer(category.data.content);
       this.curCategory = category.data;
       if (this.curCategory.url == 'Russian-Conjugated-Verbs' && !this.urlverb) {
@@ -165,8 +158,8 @@ export class RussianLanguageComponent implements OnInit {
       } else {
         this.urlverb ? this.getConjugatedVerb(this.urlverb) : null;
       }
-      this.title = "Russian language - " + this.curCategory.name;
-      this.titleService.setTitle(this.title);
+      this.titleService.setTitle(this.curCategory.metaTitle);
+      this.meta.updateTag({name: 'description', content: this.curCategory.metaDescription});
     })
   }
   rowClick(type, category) {
@@ -175,7 +168,6 @@ export class RussianLanguageComponent implements OnInit {
   ngOnInit() {
     this.title = "Russian language - Russian alphabet";
     this.titleService.setTitle(this.title);
-    //$('.loader-wrap').show();
     this.getSections();
     this.getComponent();
   }

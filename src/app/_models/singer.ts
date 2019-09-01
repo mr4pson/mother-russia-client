@@ -9,4 +9,6 @@ export class Singer {
     headerMobile: string;
     genres: number[];
     tracklist: Song[];
+    metaTitle: string;
+    metaDescription: string;
   }

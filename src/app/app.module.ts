@@ -1,3 +1,5 @@
+import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -69,8 +71,11 @@ import { BlockerInstructionsComponent } from './blocker-instructions/blocker-ins
     AdblockComponent,
     BlockerInstructionsComponent
   ],
-  imports: [
-    BrowserModule,
+  imports:[
+ CommonModule,
+NgtUniversalModule,
+ 
+    
     NgxY2PlayerModule,
     AppRoutingModule,
     SlickCarouselModule,
@@ -84,6 +89,5 @@ import { BlockerInstructionsComponent } from './blocker-instructions/blocker-ins
     ImageService,
     StripHtmlPipe
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

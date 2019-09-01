@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Article } from '../_models/article';
 import { ArticleService } from '../_services/article.service';
-import { globals } from '../globals';
 import { ImageService } from './../_services/image.service';
-import { Title } from "@angular/platform-browser";
-//declare var $: any;
+import { PageService } from './../_services/page.service';
+import { Title, Meta } from "@angular/platform-browser";
+import { Page } from './../_models/page';
+
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-kitchen',
@@ -21,7 +23,9 @@ export class KitchenComponent implements OnInit {
     private router: Router,
     private articleService: ArticleService,
     private titleService:Title,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private pageService: PageService,
+    private meta: Meta
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if (e instanceof NavigationEnd) {
@@ -33,23 +37,19 @@ export class KitchenComponent implements OnInit {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   initialiseInvites() {
-    this.titleService.setTitle("Kitchen");
-    this.articleService.getArticlesBySection('kitchen').subscribe(
-      articles => {
-        this.articles = articles.data
-        console.log(this.articles);
-        // setTimeout(function() {
-        //   var image = document.createElement('img');
-        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-        //   image.onload = function () {
-        //     $('.loader-wrap').fadeOut();
-        //   };
-        // }, 100);
-      }
-    );
+    forkJoin(
+      this.articleService.getArticlesBySection('kitchen'),
+      this.pageService.getPageData('/kitchenPage')
+    ).subscribe(res => {
+      this.articles = res[0].data;
+      let page: Page = res[1].data;
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
   }
   ngOnInit() {
-    //$('.loader-wrap').show();
   }
   ngOnDestroy() {
     if (this.navigationSubscription) {

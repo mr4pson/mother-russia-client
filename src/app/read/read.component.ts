@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../_services/book.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Book } from '../_models/book';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
+import { PageService } from './../_services/page.service';
+import { Title, Meta } from "@angular/platform-browser";
+import { Page } from './../_models/page';
 
 @Component({
   selector: 'app-read',
@@ -17,6 +17,20 @@ export class ReadComponent implements OnInit {
   modernBooks: Book[] = [];
   navigationSubscription;
   title: string;
+  constructor(
+    private BookService: BookService,
+    private titleService:Title,
+    private router: Router,
+    private imageService: ImageService,
+    private pageService: PageService,
+    private meta: Meta
+  ) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
   getBooks(): void {
     this.BookService.getBooks()
       .subscribe(books => {
@@ -27,35 +41,20 @@ export class ReadComponent implements OnInit {
         this.modernBooks = books.data.filter(book => {
           return book.author.categoryId == 2
         });
-        // setTimeout(function() {
-        //   var image = document.createElement('img');
-        //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-        //   image.onload = function () {
-        //     $('.loader-wrap').fadeOut();
-        //   };
-        // }, 100);
       });
-  }
-  constructor(
-    private BookService: BookService,
-    private titleService:Title,
-    private router: Router,
-    private imageService: ImageService
-  ) {
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      if (e instanceof NavigationEnd) {
-        this.initialiseInvites();
-      }
-    });
-    
   }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   initialiseInvites() {
-    //$('.loader-wrap').show();
-    this.title = "Read";
-    this.titleService.setTitle(this.title);
+    this.pageService.getPageData('/readPage').subscribe(pageData => {
+      let page: Page = pageData.data;
+      this.title = "Read";
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
     this.getBooks();
   }
   ngOnInit() {

@@ -14,4 +14,6 @@ export class Article {
     allowWide: boolean;
     sort: number;
     views: number;
+    metaTitle: string;
+    metaDescription: string;
 }

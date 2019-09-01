@@ -25,7 +25,7 @@
                   <div class="outside">
                       <div class="content">
                           <div class="sec-h">Learn</div>
-                          <div class="preview">Test your knoledge of facts about Russia, its histor, people, culture and cuisine</div>
+                          <div class="preview">{{ sliders && sliders[0] ? sliders[0].description : '' }}</div>
                       </div>
                       <div class="filler"></div>
                   </div>
@@ -35,7 +35,7 @@
                   <div class="outside">
                       <div class="content">
                           <div class="sec-h">Kitchen</div>
-                          <div class="preview">Test your knowledge of facts about Russia, its history, people, culture and cuisine</div>
+                          <div class="preview">{{ sliders && sliders[1] ? sliders[1].description : '' }}</div>
                       </div>
                       <div class="filler"></div>
                   </div>
@@ -47,7 +47,7 @@
                   <div class="outside">
                       <div class="content">
                           <div class="sec-h">Culture</div>
-                          <div class="preview">Learn about many aspects of the Russian cultural heritage, including history, traditions, arts, society</div>
+                          <div class="preview">{{ sliders && sliders[2] ? sliders[2].description : '' }}</div>
                       </div>
                       <div class="filler"></div>
                   </div>
@@ -57,7 +57,7 @@
                   <div class="outside">
                       <div class="content">
                           <div class="sec-h">Travel</div>
-                          <div class="preview">Test your knowledge of facts about Russia, its history, people, culture and cuisine</div>
+                          <div class="preview">{{ sliders && sliders[3] ? sliders[3].description : '' }}</div>
                       </div>
                       <div class="filler"></div>
                   </div>

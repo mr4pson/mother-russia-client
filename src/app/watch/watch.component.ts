@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit , Inject} from '@angular/core';
 import { Watch } from '../_models/watch';
 import { WatchService } from '../_services/watch.service';
 import { HostListener } from '@angular/core';
-import { globals } from '../globals';
-import { Title } from "@angular/platform-browser";
+import { PageService } from './../_services/page.service';
+import { Title, Meta } from "@angular/platform-browser";
+import { Page } from './../_models/page';
 import { ImageService } from './../_services/image.service';
-//declare var $: any;
 
 @Component({
   selector: 'app-watch',
@@ -27,7 +28,24 @@ export class WatchComponent implements OnInit {
   title: string;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = this.window.innerWidth;
+  }
+  constructor(@Inject(WINDOW) private window: Window, 
+    private WatchService: WatchService,
+    private titleService:Title,
+    private imageService: ImageService,
+    private pageService: PageService,
+    private meta: Meta
+  ) {
+    this.innerWidth = window.screen.width;
+    this.pageService.getPageData('/watchPage').subscribe(pageData => {
+      let page: Page = pageData.data;
+      this.title = "Watch";
+      this.titleService.setTitle(page.metaTitle);
+      this.meta.updateTag({name: 'description', content: page.metaDescription});
+    }, error => {
+      alert('Network issues. Please, reload the page.');
+    });
   }
   removeGenre(id) {
     let curGenre = this.filteredWatchGenres.find(genre => genre.id === id);
@@ -36,7 +54,6 @@ export class WatchComponent implements OnInit {
   selectValue( values : any ) {
     this.currentStart = values.minDate;
     this.currentEnd = values.maxDate;
-    console.log(values);
   }
   applyFilter() {
     this.filteredWatches = this.watches.filter(watch => 
@@ -48,14 +65,13 @@ export class WatchComponent implements OnInit {
       (watch.youtube.trim() !== '' && this.watchCheckboxChecked || !this.watchCheckboxChecked)
     ).sort(function() {
       return .5 - Math.random();
-    });/*.sort(compare);*/
+    });
   }
   getGenres() {
     this.WatchService.getGenres()
         .subscribe(genres => this.filteredWatchGenres = genres.data);
   }
   resetFilter() {
-    //this.filteredWatches = JSON.parse(JSON.stringify(this.watches)).sort(compare);
     this.filteredWatches = JSON.parse(JSON.stringify(this.watches)).sort(function() {
       return .5 - Math.random();
     });
@@ -69,13 +85,6 @@ export class WatchComponent implements OnInit {
     let randomWatch = this.watches.sort( function() { return 0.5 - Math.random() } )[0];
     this.header = randomWatch.header;
     this.headerMobile = randomWatch.headerMobile;
-    // setTimeout(function() {
-    //   var image = document.createElement('img');
-    //   image.src = globals.getBgUrl($('.top-image-content')[0]);
-    //   image.onload = function () {
-    //     $('.loader-wrap').fadeOut();
-    //   };
-    // }, 100);
   }
   getWatches(): void {
     this.WatchService.getWatches()
@@ -83,27 +92,16 @@ export class WatchComponent implements OnInit {
         {
           this.watches = watches.data.sort(function() {
             return .5 - Math.random();
-          });/*.sort(compare);*/
+          });
           this.filteredWatches = JSON.parse(JSON.stringify(this.watches));
           this.getRandomHeader();
         }
       );
   }
-
-  constructor(
-    private WatchService: WatchService,
-    private titleService:Title,
-    private imageService: ImageService
-  ) {
-    this.innerWidth = window.screen.width;
-    this.title = "Watch";
-    this.titleService.setTitle(this.title);
-  }
   getBckgndImageUrl(imageUrl) {
     return this.imageService.getBckgndImageUrl(imageUrl);
   }
   ngOnInit() {
-    //$('.loader-wrap').show();
     this.getWatches();
     this.getGenres()
   }

@@ -62,6 +62,7 @@ table td {
 }
 .about-content {
     font-family: 'Roboto', sans-serif!important;
+    padding-bottom: 40px;
 }
 .fr-view button.fr-dib.fr-fil {
     margin-left: 0;
@@ -270,4 +271,19 @@ app-adblock {
     background-color: #282828;
     max-width: 1280px;
     margin: auto;
+}
+
+
+.developers-wrap {
+
+}
+.developer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.developer__name {
+    margin-top: 10px;
+}
+.developer__position {
+
 }

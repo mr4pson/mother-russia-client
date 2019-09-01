@@ -187,6 +187,7 @@
     font-weight: 600;
     margin-top: 25px;
     margin-bottom: 20px;
+    text-align: center;
 }
 .related-wrap .book-item:first-child {
     margin-left: 0;
